@@ -100,19 +100,12 @@
     .footer-row p { max-width: 430px; margin: 0; color: var(--muted); font-size: .78rem; }
     .foot-brand { font: 700 1.5rem var(--serif); letter-spacing: -.06em; }
     .admin-link { color: var(--muted); font-size: .75rem; text-underline-offset: 3px; }
-    dialog.admin-dialog { width: min(620px, calc(100% - 28px)); max-height: min(88vh, 820px); padding: 0; color: var(--ink); background: var(--paper); border: 1px solid var(--ink); box-shadow: 12px 16px 0 rgba(25,43,37,.2); }
-    dialog.admin-dialog::backdrop { background: rgba(25,43,37,.62); }
-    .admin-inner { padding: clamp(22px, 5vw, 42px); }
-    .admin-inner h2 { margin: 10px 0 15px; font: 700 clamp(2.1rem, 7vw, 3.3rem)/.95 var(--serif); letter-spacing: -.06em; }
-    .admin-warning { padding: 13px; background: rgba(230,189,69,.28); font-size: .84rem; }
-    .admin-fields { display: grid; gap: 15px; margin: 22px 0; }
-    .admin-fields label { display: grid; gap: 6px; font-size: .82rem; font-weight: 700; }
-    .admin-fields input, .admin-fields textarea { width: 100%; padding: 10px; color: var(--ink); background: #fffdf8; border: 1px solid var(--line); border-radius: 0; font: 1rem/1.45 var(--sans); }
-    .admin-fields textarea { min-height: 86px; resize: vertical; }
-    .admin-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-    .admin-actions button { min-height: 44px; padding: 9px 13px; color: var(--paper); background: var(--ink); border: 1px solid var(--ink); font: 700 .82rem var(--sans); cursor: pointer; }
-    .admin-actions button.secondary { color: var(--ink); background: transparent; }
-    .admin-status { min-height: 1.5em; margin: 14px 0 0; font-size: .82rem; }
+    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 22px; }
+    .gallery figure { margin: 0; }
+    .gallery img { display: block; width: 100%; height: auto; background: var(--blue); border: 1px solid var(--ink); box-shadow: 8px 10px 0 rgba(25,43,37,.15); }
+    .gallery figcaption { margin-top: 14px; color: var(--muted); font-size: .85rem; }
+    .issue-art.has-photo:before, .issue-art.has-photo:after { display: none; }
+    .issue-art img { display: block; width: 100%; height: 100%; max-height: 520px; object-fit: cover; }
     @media (max-width: 700px) {
       .wrap { width: min(100% - 30px, 540px); }
       .topline .wrap { align-items: flex-start; flex-direction: column; justify-content: center; gap: 2px; padding: 8px 0; font-size: .63rem; }
@@ -144,7 +137,7 @@
     <header>
       <a class="brand" href="#home" aria-label="Backpocket home">backpocket.</a>
       <nav aria-label="Main navigation">
-        <a href="#issue">The zine</a><a href="#about">About</a><a href="#research">Field notes</a><a href="#order">Get a copy</a><a href="#socials">Socials</a>
+        <a href="#issue">The zine</a><a href="#gallery">Inside</a><a href="#about">About</a><a href="#research">Field notes</a><a href="#order">Get a copy</a><a href="#socials">Socials</a>
       </nav>
     </header>
     <main id="home" tabindex="-1">
@@ -170,15 +163,21 @@
       </section>
 
       <section id="issue" aria-labelledby="issue-title">
-        <div class="section-head"><div><div class="eyebrow">On the worktable</div><h2 id="issue-title">The next<br>little thing.</h2></div><p>Backpocket is being made one issue at a time, with a first-issue release target of January 1, 2027. This space will hold the issue and confirmed order details when they are ready.</p></div>
+        <div class="section-head"><div><div class="eyebrow">On the worktable</div><h2 id="issue-title">The next<br>little thing.</h2></div><p data-admin-key="issue-lede">Backpocket is being made one issue at a time, with a first-issue release target of January 1, 2027. This space will hold the issue and confirmed order details when they are ready.</p></div>
         <div class="issue">
-          <div class="issue-art" role="img" aria-label="Abstract paper collage with layered shapes"></div>
+          <div class="issue-art" id="issue-art" role="img" aria-label="Abstract paper collage with layered shapes"></div>
           <div class="issue-copy"><span class="tag">First issue · in progress</span><h3 data-admin-key="issue-title">Made from what’s close at hand.</h3><p data-admin-key="issue-summary">A first issue about collecting pieces, finding connections, and making something your own. The format, page count, print run, and production schedule are still being worked out.</p><a class="button" href="#order">Subscription details</a><p class="note">This link goes to the current subscription and order information below. This draft site does not collect sign-ups, orders, payments, or donations.</p></div>
         </div>
       </section>
 
+      <section id="gallery" aria-labelledby="gallery-title">
+        <div class="section-head"><div><div class="eyebrow">Peek inside</div><h2 id="gallery-title" data-admin-key="gallery-title">Pages &amp; scraps.</h2></div><p data-admin-key="gallery-lede">A look at pages, collages and works in progress from the issue.</p></div>
+        <div class="gallery" id="gallery-grid"></div>
+        <p class="note" id="gallery-empty">Photos from the first issue will appear here.</p>
+      </section>
+
       <section id="about" aria-labelledby="about-title">
-        <div class="section-head"><div><div class="eyebrow">A pocket-sized practice</div><h2 id="about-title">Made by hand.<br>Made to wander.</h2></div><p>Backpocket is its own little world, alongside the artist’s wider practice. It starts with collage and stays open to whatever medium, memory, or question belongs in the next page.</p></div>
+        <div class="section-head"><div><div class="eyebrow">A pocket-sized practice</div><h2 id="about-title">Made by hand.<br>Made to wander.</h2></div><p data-admin-key="about-lede">Backpocket is its own little world, alongside the artist’s wider practice. It starts with collage and stays open to whatever medium, memory, or question belongs in the next page.</p></div>
         <div class="values">
           <article class="value"><b>01 / Collect</b><h3>Save the fragments.</h3><p>Images, textures, phrases, odd observations: a starting point is allowed to be small.</p></article>
           <article class="value"><b>02 / Connect</b><h3>Follow the thread.</h3><p>Let research and experiments shift the idea. Nothing needs to be settled on the first pass.</p></article>
@@ -209,94 +208,48 @@
         <ul class="socials" aria-label="Social links"><li><span class="social-placeholder">Instagram · handle to be added</span></li><li><span class="social-placeholder">Other links · coming soon</span></li></ul>
       </section>
     </main>
-    <footer><div class="footer-row"><a class="foot-brand" href="#home">Backpocket</a><p>A work-in-progress website for an independent artist-made zine. Before launch: add current issue details, confirm contact/order/payment and postage arrangements, and replace the social placeholders with real links.</p></div><p style="margin:20px 0 0"><a class="admin-link" id="admin-open" href="#admin-dialog">Admin · local editor</a></p></footer>
+    <footer><div class="footer-row"><a class="foot-brand" href="#home">Backpocket</a><p>A work-in-progress website for an independent artist-made zine. Before launch: add current issue details, confirm contact/order/payment and postage arrangements, and replace the social placeholders with real links.</p></div><p style="margin:20px 0 0"><a class="admin-link" href="admin/">Admin</a></p></footer>
   </div>
-  <dialog class="admin-dialog" id="admin-dialog" aria-labelledby="admin-heading">
-    <div class="admin-inner">
-      <p class="eyebrow">Backpocket site desk</p>
-      <h2 id="admin-heading">Edit this issue.</h2>
-      <p class="admin-warning"><strong>Local editor, not a secure login.</strong> Changes are saved only in this browser. Export the updated HTML to publish it. Don’t enter subscriber, order, payment, or other private information here.</p>
-      <div class="admin-fields">
-        <label>Top line <input data-admin-field="tagline" maxlength="120"></label>
-        <label>About Backpocket <textarea data-admin-field="intro" maxlength="500"></textarea></label>
-        <label>Issue title <input data-admin-field="issue-title" maxlength="120"></label>
-        <label>Issue description <textarea data-admin-field="issue-summary" maxlength="600"></textarea></label>
-        <label>Order heading <input data-admin-field="order-title" maxlength="120"></label>
-        <label>Order information <textarea data-admin-field="order-info" maxlength="600"></textarea></label>
-      </div>
-      <div class="admin-actions">
-        <button type="button" id="admin-save">Save on this device</button>
-        <button type="button" id="admin-export">Export updated website</button>
-        <button type="button" class="secondary" id="admin-reset">Restore original copy</button>
-        <button type="button" class="secondary" id="admin-close">Close</button>
-      </div>
-      <p class="admin-status" id="admin-status" role="status" aria-live="polite"></p>
-    </div>
-  </dialog>
-  <script id="admin-script">
+  <script>
+    // Loads content.json (written by the admin page) and applies it over the built-in copy.
     (() => {
-      const storageKey = 'backpocket-admin-content-v1';
-      const targets = [...document.querySelectorAll('[data-admin-key]')];
-      const fields = [...document.querySelectorAll('[data-admin-field]')];
-      const defaults = Object.fromEntries(targets.map((element) => [element.dataset.adminKey, element.textContent]));
-      const dialog = document.getElementById('admin-dialog');
-      const status = document.getElementById('admin-status');
-      const values = () => Object.fromEntries(fields.map((field) => [field.dataset.adminField, field.value.trim()]));
-      const reflect = (content) => {
-        targets.forEach((element) => {
-          if (typeof content[element.dataset.adminKey] === 'string') {
-            element.textContent = content[element.dataset.adminKey];
+      fetch('content.json', { cache: 'no-cache' })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((c) => {
+          if (!c) return;
+          document.querySelectorAll('[data-admin-key]').forEach((el) => {
+            const v = c.text && c.text[el.dataset.adminKey];
+            if (typeof v === 'string' && v.trim()) el.textContent = v;
+          });
+          const art = document.getElementById('issue-art');
+          if (c.issueImage && c.issueImage.src) {
+            const img = document.createElement('img');
+            img.src = c.issueImage.src;
+            img.alt = c.issueImage.alt || '';
+            art.classList.add('has-photo');
+            art.removeAttribute('role');
+            art.removeAttribute('aria-label');
+            art.appendChild(img);
           }
-        });
-        fields.forEach((field) => {
-          field.value = targets.find((element) => element.dataset.adminKey === field.dataset.adminField)?.textContent ?? '';
-        });
-      };
-
-      try {
-        const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
-        reflect(saved && typeof saved === 'object' ? saved : {});
-      } catch (error) {
-        status.textContent = 'This browser could not read saved edits. You can still edit and export a copy.';
-      }
-
-      document.getElementById('admin-open').addEventListener('click', (event) => {
-        event.preventDefault();
-        dialog.showModal();
-      });
-      document.getElementById('admin-close').addEventListener('click', () => dialog.close());
-      document.getElementById('admin-save').addEventListener('click', () => {
-        const content = values();
-        reflect(content);
-        try {
-          localStorage.setItem(storageKey, JSON.stringify(content));
-          status.textContent = 'Saved on this device. Export the website HTML when you are ready to publish.';
-        } catch (error) {
-          status.textContent = 'Edits are showing in this page, but this browser could not save them. Export the website to keep them.';
-        }
-      });
-      document.getElementById('admin-reset').addEventListener('click', () => {
-        try { localStorage.removeItem(storageKey); } catch (error) { /* Reset the visible copy even if storage is blocked. */ }
-        reflect(defaults);
-        status.textContent = 'Original copy restored in this page.';
-      });
-      document.getElementById('admin-export').addEventListener('click', () => {
-        reflect(values());
-        const copy = document.documentElement.cloneNode(true);
-        copy.querySelector('#admin-dialog')?.remove();
-        copy.querySelector('#admin-open')?.closest('p')?.remove();
-        copy.querySelector('#admin-script')?.remove();
-        copy.querySelector('style')?.insertAdjacentHTML('beforeend', '');
-        const html = '<!doctype html>\n' + copy.outerHTML;
-        const file = new Blob([html], { type: 'text/html;charset=utf-8' });
-        const url = URL.createObjectURL(file);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'backpocket-site.html';
-        link.click();
-        URL.revokeObjectURL(url);
-        status.textContent = 'Exported backpocket-site.html. Upload that file to publish the edited copy.';
-      });
+          const grid = document.getElementById('gallery-grid');
+          const items = Array.isArray(c.gallery) ? c.gallery.filter((g) => g && g.src) : [];
+          items.forEach((g) => {
+            const fig = document.createElement('figure');
+            const img = document.createElement('img');
+            img.src = g.src;
+            img.alt = g.alt || '';
+            img.loading = 'lazy';
+            fig.appendChild(img);
+            if (g.caption) {
+              const cap = document.createElement('figcaption');
+              cap.textContent = g.caption;
+              fig.appendChild(cap);
+            }
+            grid.appendChild(fig);
+          });
+          if (items.length) document.getElementById('gallery-empty').hidden = true;
+        })
+        .catch(() => { /* keep the built-in copy */ });
     })();
   </script>
   <script>
