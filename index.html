@@ -3,334 +3,323 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
-  <title>Backpocket · site desk</title>
+  <meta name="theme-color" content="#f4eddf">
+  <meta name="description" content="Backpocket is an independent artist-made monthly pocket-gallery zine. Explore the first issue and its planned mail subscription.">
+  <title>Backpocket — a little room in your pocket</title>
   <style>
-    :root { --paper:#f4eddf; --ink:#192b25; --muted:#526158; --tomato:#d95436; --yellow:#e6bd45; --line:rgba(25,43,37,.28); --serif:Georgia,'Times New Roman',serif; --sans:'Trebuchet MS',Arial,sans-serif; }
-    * { box-sizing:border-box; }
-    body { margin:0; color:var(--ink); background:var(--paper); font-family:var(--sans); line-height:1.5; }
-    .wrap { width:min(820px, calc(100% - 32px)); margin:0 auto; padding:36px 0 120px; }
-    .eyebrow { font-size:.73rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
-    h1 { margin:8px 0 6px; font:700 clamp(2.4rem,8vw,4rem)/.95 var(--serif); letter-spacing:-.06em; }
-    h2 { margin:0 0 14px; font:700 1.6rem/1.1 var(--serif); letter-spacing:-.03em; }
-    section { padding:30px 0; border-top:1px solid var(--line); }
-    p { margin:0 0 12px; }
-    .muted { color:var(--muted); font-size:.85rem; }
-    .warn { padding:12px 14px; background:rgba(230,189,69,.28); font-size:.84rem; }
-    label { display:grid; gap:6px; margin-bottom:14px; font-size:.82rem; font-weight:700; }
-    input, textarea { width:100%; padding:10px; color:var(--ink); background:#fffdf8; border:1px solid var(--line); border-radius:0; font:1rem/1.45 var(--sans); }
-    textarea { min-height:90px; resize:vertical; }
-    .row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
-    button, .btn { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:9px 16px; color:var(--paper); background:var(--ink); border:2px solid var(--ink); border-radius:2px; font:700 .85rem var(--sans); cursor:pointer; }
-    button.secondary, .btn.secondary { color:var(--ink); background:transparent; }
-    button.small { min-height:34px; padding:4px 10px; }
-    button:disabled { opacity:.5; cursor:not-allowed; }
-    :focus-visible { outline:3px solid var(--tomato); outline-offset:3px; }
-    .card { display:grid; grid-template-columns:120px 1fr; gap:14px; padding:14px; margin-bottom:14px; background:#fffdf8; border:1px solid var(--line); }
-    .card img { width:120px; height:120px; object-fit:cover; border:1px solid var(--ink); background:#ddd; }
-    .card .tools { display:flex; gap:8px; flex-wrap:wrap; }
-    .card label { margin-bottom:8px; }
-    .bar { position:fixed; left:0; right:0; bottom:0; padding:12px 16px; background:var(--ink); color:var(--paper); display:flex; gap:14px; align-items:center; justify-content:center; flex-wrap:wrap; }
-    .bar button { color:var(--ink); background:var(--yellow); border-color:var(--yellow); }
-    #status { margin:0; font-size:.85rem; }
-    [hidden] { display:none !important; }
-    @media (max-width:640px) { .row { grid-template-columns:1fr; } .card { grid-template-columns:1fr; } .card img { width:100%; height:200px; } }
+    :root {
+      --paper: #f4eddf;
+      --ink: #192b25;
+      --muted: #526158;
+      --tomato: #d95436;
+      --blue: #8db6b0;
+      --yellow: #e6bd45;
+      --line: rgba(25, 43, 37, .28);
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: 'Trebuchet MS', Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); line-height: 1.5; }
+    a { color: inherit; }
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--tomato); outline-offset: 3px; }
+    .skip-link { position: absolute; z-index: 10; top: 8px; left: 8px; padding: 10px 14px; color: var(--paper); background: var(--ink); transform: translateY(-150%); }
+    .skip-link:focus { transform: translateY(0); }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    .topline { border-bottom: 1px solid var(--line); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; }
+    .topline .wrap { min-height: 42px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .topline p { margin: 0; }
+    .topline a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    header { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; border-bottom: 1px solid var(--line); }
+    .brand { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; text-decoration: none; letter-spacing: -.06em; }
+    nav { display: flex; gap: clamp(14px, 3vw, 34px); font-size: .88rem; }
+    nav a { display: inline-flex; min-height: 44px; align-items: center; text-decoration: none; border-bottom: 1px solid transparent; }
+    nav a:hover { border-color: var(--ink); }
+    .hero { min-height: 610px; display: grid; grid-template-columns: 1.02fr .98fr; align-items: center; gap: 5vw; padding: 72px 0 84px; }
+    .deadline { display: grid; grid-template-columns: minmax(0, .8fr) minmax(260px, 1.2fr); align-items: center; gap: 26px; margin: 0 0 54px; padding: clamp(22px, 4vw, 38px); background: var(--yellow); border: 1px solid var(--ink); }
+    .deadline h2 { font: 700 clamp(2.5rem, 6vw, 5rem)/.9 var(--serif); }
+    .deadline h2 small { display: block; margin-top: 8px; font: 700 .75rem/1.3 var(--sans); letter-spacing: .12em; text-transform: uppercase; }
+    .deadline p { max-width: 520px; margin: 0; }
+    .eyebrow { font-size: .73rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 650px; margin: 17px 0 18px; font: 700 clamp(4rem, 10vw, 8.5rem)/.82 var(--serif); letter-spacing: -.085em; }
+    h1 span { display: block; color: var(--tomato); font-style: italic; font-weight: 400; }
+    .intro { max-width: 440px; font: 1.16rem/1.55 var(--serif); }
+    .actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 30px; }
+    .button { display: inline-flex; justify-content: center; align-items: center; min-height: 48px; padding: 12px 20px; color: var(--paper); background: var(--ink); font-size: .85rem; font-weight: 700; text-decoration: none; border: 2px solid var(--ink); border-radius: 2px; }
+    .button:hover { color: var(--ink); background: transparent; }
+    .textlink { font-size: .88rem; text-underline-offset: 4px; }
+    .artboard { position: relative; min-height: 440px; display: grid; place-items: center; }
+    .sun { position: absolute; top: 5%; right: 13%; width: 114px; aspect-ratio: 1; background: var(--yellow); border-radius: 50%; }
+    .cover { position: relative; z-index: 1; width: min(74%, 340px); aspect-ratio: .73; padding: 23px; overflow: hidden; transform: rotate(4deg); background: var(--tomato); box-shadow: 12px 16px 0 rgba(25,43,37,.19); }
+    .cover:before { content: ''; position: absolute; width: 230px; height: 230px; top: 25%; left: 14%; background: var(--blue); border-radius: 50% 48% 40% 55%; transform: rotate(-24deg); }
+    .cover:after { content: ''; position: absolute; width: 110px; height: 220px; top: 28%; left: 39%; background: var(--yellow); clip-path: polygon(50% 0, 100% 50%, 54% 100%, 0 48%); transform: rotate(17deg); }
+    .cover-title { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: flex-start; color: var(--paper); font: 700 clamp(2.7rem, 6vw, 4.5rem)/.8 var(--serif); letter-spacing: -.09em; }
+    .cover-title small { font: 700 .65rem/1 var(--sans); letter-spacing: .12em; writing-mode: vertical-rl; }
+    .cover-note { position: absolute; z-index: 3; left: 22px; bottom: 20px; color: var(--ink); font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .tape { position: absolute; z-index: 4; top: 10%; left: 5%; width: 100px; height: 24px; background: rgba(244,237,223,.65); transform: rotate(-35deg); }
+    .scribble { position: absolute; right: 3%; bottom: 10%; z-index: 2; width: 100px; color: var(--ink); font: italic 1rem var(--serif); transform: rotate(9deg); }
+    section { padding: 78px 0; border-top: 1px solid var(--line); }
+    .section-head { display: grid; grid-template-columns: 1fr 1.2fr; gap: 30px; align-items: start; margin-bottom: 36px; }
+    h2 { margin-bottom: 0; font: 700 clamp(2.6rem, 5.2vw, 5.1rem)/.9 var(--serif); letter-spacing: -.075em; }
+    .section-head p { max-width: 450px; margin: 3px 0 0; font: 1.05rem/1.55 var(--serif); }
+    .issue { display: grid; grid-template-columns: .92fr 1.08fr; gap: 5vw; align-items: center; }
+    .issue-art { position: relative; min-height: 330px; display: grid; place-items: center; background: var(--blue); overflow: hidden; }
+    .issue-art:before { content: ''; width: 180px; height: 240px; background: var(--yellow); transform: rotate(-13deg); box-shadow: 8px 10px 0 rgba(25,43,37,.15); }
+    .issue-art:after { content: 'BACK\A POCKET'; white-space: pre; position: absolute; color: var(--tomato); font: 700 2.6rem/.78 var(--serif); letter-spacing: -.1em; transform: rotate(-13deg); }
+    .issue-copy h3 { margin: 14px 0; font: 700 2.1rem/1.05 var(--serif); letter-spacing: -.04em; }
+    .issue-copy p { max-width: 470px; color: var(--muted); }
+    .tag { display: inline-block; padding: 5px 9px; border: 1px solid var(--ink); border-radius: 99px; font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .issue-copy .button { margin-top: 10px; }
+    .note { max-width: 470px; margin: 12px 0 0; color: var(--muted); font-size: .75rem; }
+    .values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .value { min-height: 190px; padding: 25px; background: var(--paper); }
+    .value b { display: block; margin-bottom: 26px; color: var(--tomato); font: italic 1.55rem var(--serif); }
+    .value h3 { margin-bottom: 9px; font: 700 1.25rem var(--serif); }
+    .value p { max-width: 270px; margin-bottom: 0; color: var(--muted); font-size: .87rem; }
+    .order-panel { display: grid; grid-template-columns: 1fr .86fr; gap: 6vw; padding: clamp(25px, 5vw, 55px); color: var(--paper); background: var(--ink); }
+    .order-panel h2 { max-width: 500px; color: var(--paper); }
+    .order-panel .eyebrow { color: var(--yellow); }
+    .order-panel p { max-width: 470px; margin: 20px 0 0; color: rgba(244,237,223,.8); }
+    .order-steps { display: grid; align-content: center; gap: 15px; margin: 0; padding: 0; list-style: none; counter-reset: steps; }
+    .order-steps li { counter-increment: steps; display: grid; grid-template-columns: 35px 1fr; gap: 12px; padding-bottom: 15px; border-bottom: 1px solid rgba(244,237,223,.25); color: rgba(244,237,223,.82); font-size: .9rem; }
+    .order-steps li:before { content: '0' counter(steps); color: var(--yellow); font-size: .73rem; font-weight: 700; }
+    .order-steps b { color: var(--paper); }
+    .order-steps a { color: var(--paper); }
+    .research { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .resource { display: flex; justify-content: space-between; gap: 20px; padding: 19px 0; border-top: 1px solid var(--line); text-decoration: none; }
+    .resource:hover .resource-title { text-decoration: underline; text-underline-offset: 4px; }
+    .resource-title { font: 700 1.2rem var(--serif); }
+    .resource small { display: block; margin-top: 5px; color: var(--muted); font-size: .77rem; }
+    .arrow { font-size: 1.2rem; }
+    .socials { display: flex; flex-wrap: wrap; gap: 10px; padding: 0; list-style: none; }
+    .socials a, .social-placeholder { display: inline-block; padding: 9px 13px; border: 1px solid var(--ink); border-radius: 99px; font-size: .82rem; }
+    .social-placeholder { color: var(--muted); border-style: dashed; }
+    footer { padding: 35px 0 45px; border-top: 1px solid var(--line); }
+    .footer-row { display: flex; justify-content: space-between; gap: 25px; align-items: start; }
+    .footer-row p { max-width: 430px; margin: 0; color: var(--muted); font-size: .78rem; }
+    .foot-brand { font: 700 1.5rem var(--serif); letter-spacing: -.06em; }
+    .admin-link { color: var(--muted); font-size: .75rem; text-underline-offset: 3px; }
+    dialog.admin-dialog { width: min(620px, calc(100% - 28px)); max-height: min(88vh, 820px); padding: 0; color: var(--ink); background: var(--paper); border: 1px solid var(--ink); box-shadow: 12px 16px 0 rgba(25,43,37,.2); }
+    dialog.admin-dialog::backdrop { background: rgba(25,43,37,.62); }
+    .admin-inner { padding: clamp(22px, 5vw, 42px); }
+    .admin-inner h2 { margin: 10px 0 15px; font: 700 clamp(2.1rem, 7vw, 3.3rem)/.95 var(--serif); letter-spacing: -.06em; }
+    .admin-warning { padding: 13px; background: rgba(230,189,69,.28); font-size: .84rem; }
+    .admin-fields { display: grid; gap: 15px; margin: 22px 0; }
+    .admin-fields label { display: grid; gap: 6px; font-size: .82rem; font-weight: 700; }
+    .admin-fields input, .admin-fields textarea { width: 100%; padding: 10px; color: var(--ink); background: #fffdf8; border: 1px solid var(--line); border-radius: 0; font: 1rem/1.45 var(--sans); }
+    .admin-fields textarea { min-height: 86px; resize: vertical; }
+    .admin-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .admin-actions button { min-height: 44px; padding: 9px 13px; color: var(--paper); background: var(--ink); border: 1px solid var(--ink); font: 700 .82rem var(--sans); cursor: pointer; }
+    .admin-actions button.secondary { color: var(--ink); background: transparent; }
+    .admin-status { min-height: 1.5em; margin: 14px 0 0; font-size: .82rem; }
+    @media (max-width: 700px) {
+      .wrap { width: min(100% - 30px, 540px); }
+      .topline .wrap { align-items: flex-start; flex-direction: column; justify-content: center; gap: 2px; padding: 8px 0; font-size: .63rem; }
+      header { align-items: flex-start; flex-wrap: wrap; gap: 8px 18px; }
+      nav { width: 100%; gap: 4px 8px; flex-wrap: wrap; justify-content: flex-start; font-size: .77rem; }
+      nav a { padding: 0 4px; }
+      .hero { min-height: 0; grid-template-columns: 1fr; gap: 5px; padding: 65px 0 45px; }
+      .deadline { grid-template-columns: 1fr; gap: 12px; margin-bottom: 40px; }
+      h1 { font-size: clamp(4.3rem, 19vw, 7rem); }
+      .artboard { min-height: 365px; }
+      .cover { width: min(67%, 280px); }
+      section { padding: 58px 0; }
+      .section-head, .issue, .order-panel { grid-template-columns: 1fr; gap: 27px; }
+      .section-head { margin-bottom: 25px; }
+      .issue-art { min-height: 270px; }
+      .values { grid-template-columns: 1fr; }
+      .value { min-height: 0; }
+      .value b { margin-bottom: 13px; }
+      .research { grid-template-columns: 1fr; }
+      .footer-row { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   </style>
 </head>
 <body>
-<main class="wrap">
-  <p class="eyebrow">Backpocket site desk</p>
-  <h1>Edit the zine site.</h1>
-  <p class="muted">Changes are saved straight to your GitHub repository, and the live site updates a minute or two later. <a href="../">← Back to the site</a></p>
+  <a class="skip-link" href="#home">Skip to main content</a>
+  <div class="topline"><div class="wrap"><p data-admin-key="tagline">Independent, artist-made, made with feeling</p><a href="#order">Monthly issue · order info ↓</a></div></div>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="#home" aria-label="Backpocket home">backpocket.</a>
+      <nav aria-label="Main navigation">
+        <a href="#issue">The zine</a><a href="#about">About</a><a href="#research">Field notes</a><a href="#order">Get a copy</a><a href="#socials">Socials</a>
+      </nav>
+    </header>
+    <main id="home" tabindex="-1">
+      <section class="hero" style="border:0" aria-labelledby="hero-title">
+        <div>
+          <div class="eyebrow">A small press for big feelings</div>
+          <h1 id="hero-title">Keep a little <span>room.</span></h1>
+          <p class="intro" data-admin-key="intro">Backpocket is a monthly pocket gallery for artists to share work and make connections. Each issue gathers images, scraps, and ideas into something small enough to keep close.</p>
+          <div class="actions"><a class="button" href="#order">See the first issue plan</a><a class="textlink" href="#about">Meet Backpocket</a></div>
+        </div>
+        <div class="artboard" aria-label="Abstract collage illustration in the colors of the Backpocket cover" role="img">
+          <div class="sun"></div><div class="scribble">cut, keep,<br>rearrange</div>
+          <div class="cover"><div class="tape"></div><div class="cover-title">back<br>pocket<small>an artist zine</small></div><div class="cover-note">issue 01 · coming together</div></div>
+        </div>
+      </section>
 
-  <section id="connect">
-    <h2>1 · Connect to GitHub</h2>
-    <p class="warn">Only someone with your GitHub access token can save changes here. The token stays in this browser only. Use your own device, and press “Disconnect” on a shared one.</p>
-    <div class="row" style="margin-top:14px">
-      <label>GitHub username <input id="owner" autocomplete="off"></label>
-      <label>Repository name <input id="repo" autocomplete="off"></label>
-      <label>Branch <input id="branch" value="main" autocomplete="off"></label>
-    </div>
-    <label>Access token <input id="token" type="password" autocomplete="off" placeholder="github_pat_…"></label>
-    <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <button id="connect-btn" type="button">Connect &amp; load</button>
-      <button id="disconnect-btn" type="button" class="secondary">Disconnect</button>
-    </div>
-  </section>
+      <section class="deadline" aria-labelledby="release-countdown-heading">
+        <div>
+          <div class="eyebrow">First-issue release target</div>
+          <h2 id="release-countdown-heading"><span id="release-countdown-days">January 1, 2027</span><small id="release-countdown-label">Target date</small></h2>
+        </div>
+        <p id="release-countdown-description" aria-live="polite">Backpocket is working toward a first-issue release on January 1, 2027. This is a target, not a promise of postal arrival; print and mailing arrangements still need to be confirmed.</p>
+      </section>
 
-  <div id="editor" hidden>
-    <section>
-      <h2>2 · Text</h2>
-      <div id="fields"></div>
-    </section>
+      <section id="issue" aria-labelledby="issue-title">
+        <div class="section-head"><div><div class="eyebrow">On the worktable</div><h2 id="issue-title">The next<br>little thing.</h2></div><p>Backpocket is being made one issue at a time, with a first-issue release target of January 1, 2027. This space will hold the issue and confirmed order details when they are ready.</p></div>
+        <div class="issue">
+          <div class="issue-art" role="img" aria-label="Abstract paper collage with layered shapes"></div>
+          <div class="issue-copy"><span class="tag">First issue · in progress</span><h3 data-admin-key="issue-title">Made from what’s close at hand.</h3><p data-admin-key="issue-summary">A first issue about collecting pieces, finding connections, and making something your own. The format, page count, print run, and production schedule are still being worked out.</p><a class="button" href="#order">Subscription details</a><p class="note">This link goes to the current subscription and order information below. This draft site does not collect sign-ups, orders, payments, or donations.</p></div>
+        </div>
+      </section>
 
-    <section>
-      <h2>3 · Main issue photo</h2>
-      <p class="muted">Shown next to the issue description. Leave empty to keep the paper-collage artwork.</p>
-      <div id="issue-photo"></div>
-      <label class="btn secondary" style="display:inline-flex;margin-top:8px;width:auto">Choose photo
-        <input id="issue-file" type="file" accept="image/*" hidden>
-      </label>
-    </section>
+      <section id="about" aria-labelledby="about-title">
+        <div class="section-head"><div><div class="eyebrow">A pocket-sized practice</div><h2 id="about-title">Made by hand.<br>Made to wander.</h2></div><p>Backpocket is its own little world, alongside the artist’s wider practice. It starts with collage and stays open to whatever medium, memory, or question belongs in the next page.</p></div>
+        <div class="values">
+          <article class="value"><b>01 / Collect</b><h3>Save the fragments.</h3><p>Images, textures, phrases, odd observations: a starting point is allowed to be small.</p></article>
+          <article class="value"><b>02 / Connect</b><h3>Follow the thread.</h3><p>Let research and experiments shift the idea. Nothing needs to be settled on the first pass.</p></article>
+          <article class="value"><b>03 / Share</b><h3>Send it out.</h3><p>A zine turns a private pile of things into something another person can hold and respond to.</p></article>
+        </div>
+      </section>
 
-    <section>
-      <h2>4 · Gallery photos</h2>
-      <p class="muted">Add as many as you like. Photos are shrunk to a web-friendly size automatically. Use the arrows to reorder.</p>
-      <div id="gallery-list"></div>
-      <label class="btn secondary" style="display:inline-flex;margin-top:8px;width:auto">Add photos
-        <input id="gallery-file" type="file" accept="image/*" multiple hidden>
-      </label>
-    </section>
+      <section id="order" aria-labelledby="order-title">
+        <div class="order-panel">
+          <div><div class="eyebrow">A copy for your pocket</div><h2 id="order-title" data-admin-key="order-title">A pocket gallery, by post.</h2><p data-admin-key="order-info">Monthly issues are planned for Backpocket, a pocket gallery for artists to share work, with the first issue targeting January 1, 2027. Sign-ups are not open yet. Ordering is not open on this draft site, and it does not collect subscriptions, orders, payments, or donations. An optional donation may be offered to support the zine, but no donation method is set up. Price and postage details still need to be confirmed, along with the format, print and mailing schedule, subscription terms, and payment method, before sign-ups open. The release target is not a promise of postal arrival. If you want to hear when subscriptions open, check back here for a real signup link once it is ready.</p></div>
+          <ol class="order-steps"><li><span><b>First issue:</b> release target January 1, 2027; fulfillment and postal timing are not confirmed.</span></li><li><span><b>Subscription:</b> monthly mail-outs are planned; sign-ups are not open yet.</span></li><li><span><b>Before launch:</b> confirm format, print run, price, postage, terms, and a working way to subscribe.</span></li></ol>
+        </div>
+      </section>
+
+      <section id="research" aria-labelledby="research-title">
+        <div class="section-head"><div><div class="eyebrow">Open tabs, saved scraps</div><h2 id="research-title">Field notes.</h2></div><p>Good places to begin exploring zines, print histories, collections, and the practical questions around sharing images. Links open the original source pages.</p></div>
+        <div class="research">
+          <a class="resource" href="https://guides.loc.gov/zines/zine-making-resources" target="_blank" rel="noreferrer"><span><span class="resource-title">Zine publishing history</span><small>Library of Congress · research guide and further reading</small></span><span class="arrow" aria-hidden="true">↗</span></a>
+          <a class="resource" href="https://guides.loc.gov/zines/zine-distros" target="_blank" rel="noreferrer"><span><span class="resource-title">Publishers, distros & libraries</span><small>Library of Congress · starting points for finding zines</small></span><span class="arrow" aria-hidden="true">↗</span></a>
+          <a class="resource" href="https://guides.lib.umich.edu/permissions/images" target="_blank" rel="noreferrer"><span><span class="resource-title">Images & permissions</span><small>University of Michigan Library · permissions and image reuse guide</small></span><span class="arrow" aria-hidden="true">↗</span></a>
+
+        </div>
+        <p class="note">Research links are starting points, not legal advice. Check permissions and licenses before reusing someone else’s work.</p>
+      </section>
+
+      <section id="socials" aria-labelledby="social-title">
+        <div class="section-head"><div><div class="eyebrow">Find the paper trail</div><h2 id="social-title">Out in the world.</h2></div><p>Social accounts are planned. Handles and links will appear here once they are chosen and claimed.</p></div>
+        <ul class="socials" aria-label="Social links"><li><span class="social-placeholder">Instagram · handle to be added</span></li><li><span class="social-placeholder">Other links · coming soon</span></li></ul>
+      </section>
+    </main>
+    <footer><div class="footer-row"><a class="foot-brand" href="#home">Backpocket</a><p>A work-in-progress website for an independent artist-made zine. Before launch: add current issue details, confirm contact/order/payment and postage arrangements, and replace the social placeholders with real links.</p></div><p style="margin:20px 0 0"><a class="admin-link" id="admin-open" href="#admin-dialog">Admin · local editor</a></p></footer>
   </div>
-</main>
-
-<div class="bar" id="bar" hidden>
-  <p id="status" role="status" aria-live="polite">Ready.</p>
-  <button id="publish" type="button">Publish changes</button>
-</div>
-
-<script>
-(() => {
-  const $ = (s) => document.querySelector(s);
-  const CFG_KEY = 'backpocket-admin-cfg-v1';
-  const FIELDS = [
-    ['tagline', 'Top line', 'input'],
-    ['intro', 'Intro under the big title', 'textarea'],
-    ['issue-lede', 'Issue section intro', 'textarea'],
-    ['issue-title', 'Issue title', 'input'],
-    ['issue-summary', 'Issue description', 'textarea'],
-    ['gallery-title', 'Gallery heading', 'input'],
-    ['gallery-lede', 'Gallery intro', 'textarea'],
-    ['about-lede', 'About section intro', 'textarea'],
-    ['order-title', 'Order heading', 'input'],
-    ['order-info', 'Order information', 'textarea']
-  ];
-
-  let cfg = null;
-  let text = {};
-  let issueImage = null;      // {src, alt, preview?, b64?}
-  let gallery = [];           // [{src, alt, caption, preview?, b64?}]
-  let existing = new Set();   // image paths currently in the repo
-  let dirty = false;
-
-  const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
-  const status = (m) => { $('#status').textContent = m; };
-  const markDirty = () => { dirty = true; status('Unpublished changes.'); };
-  window.addEventListener('beforeunload', (e) => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
-
-  function guess() {
-    const h = location.hostname;
-    if (!h.endsWith('.github.io')) return { owner: '', repo: '' };
-    const owner = h.split('.')[0];
-    const seg = location.pathname.split('/').filter(Boolean)[0];
-    return { owner, repo: seg && seg !== 'admin' ? seg : owner + '.github.io' };
-  }
-
-  async function api(path, opts = {}) {
-    const res = await fetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}${path}`, {
-      ...opts,
-      headers: {
-        Authorization: 'Bearer ' + cfg.token,
-        Accept: 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28',
-        ...(opts.headers || {})
-      }
-    });
-    if (!res.ok) {
-      let msg = res.statusText;
-      try { msg = (await res.json()).message || msg; } catch (e) {}
-      const err = new Error(`${res.status}: ${msg}`);
-      err.status = res.status;
-      throw err;
-    }
-    return res.status === 204 ? null : res.json();
-  }
-
-  function friendly(e) {
-    if (e.status === 401 || e.status === 403) return 'GitHub refused the token. It needs “Contents: Read and write” permission on this repository. (' + e.message + ')';
-    if (e.status === 404) return 'Repository or branch not found. Check the username, repository name and branch. (' + e.message + ')';
-    return e.message || String(e);
-  }
-
-  // ---------- build the form ----------
-  function buildFields() {
-    const box = $('#fields');
-    box.textContent = '';
-    FIELDS.forEach(([key, label, type]) => {
-      const wrap = el('label', null, label);
-      const input = el(type);
-      input.value = text[key] || '';
-      input.addEventListener('input', () => { text[key] = input.value; markDirty(); });
-      wrap.appendChild(input);
-      box.appendChild(wrap);
-    });
-  }
-
-  const previewSrc = (g) => g.preview || '../' + g.src;
-
-  function renderIssuePhoto() {
-    const box = $('#issue-photo');
-    box.textContent = '';
-    if (!issueImage) return;
-    const card = el('div', 'card');
-    const img = el('img'); img.src = previewSrc(issueImage); img.alt = '';
-    const right = el('div');
-    const alt = el('label', null, 'Describe the photo (for screen readers)');
-    const ai = el('input'); ai.value = issueImage.alt || '';
-    ai.addEventListener('input', () => { issueImage.alt = ai.value; markDirty(); });
-    alt.appendChild(ai);
-    const rm = el('button', 'secondary small', 'Remove photo'); rm.type = 'button';
-    rm.addEventListener('click', () => { issueImage = null; renderIssuePhoto(); markDirty(); });
-    right.append(alt, rm);
-    card.append(img, right);
-    box.appendChild(card);
-  }
-
-  function renderGallery() {
-    const box = $('#gallery-list');
-    box.textContent = '';
-    if (!gallery.length) box.appendChild(el('p', 'muted', 'No gallery photos yet.'));
-    gallery.forEach((g, i) => {
-      const card = el('div', 'card');
-      const img = el('img'); img.src = previewSrc(g); img.alt = '';
-      const right = el('div');
-      const cap = el('label', null, 'Caption');
-      const ci = el('input'); ci.value = g.caption || ''; ci.maxLength = 200;
-      ci.addEventListener('input', () => { g.caption = ci.value; markDirty(); });
-      cap.appendChild(ci);
-      const alt = el('label', null, 'Describe the photo (for screen readers)');
-      const ai = el('input'); ai.value = g.alt || ''; ai.maxLength = 200;
-      ai.addEventListener('input', () => { g.alt = ai.value; markDirty(); });
-      alt.appendChild(ai);
-      const tools = el('div', 'tools');
-      const mk = (label, fn, disabled) => { const b = el('button', 'secondary small', label); b.type = 'button'; b.disabled = !!disabled; b.addEventListener('click', fn); return b; };
-      tools.append(
-        mk('↑ Up', () => { [gallery[i - 1], gallery[i]] = [gallery[i], gallery[i - 1]]; renderGallery(); markDirty(); }, i === 0),
-        mk('↓ Down', () => { [gallery[i + 1], gallery[i]] = [gallery[i], gallery[i + 1]]; renderGallery(); markDirty(); }, i === gallery.length - 1),
-        mk('Remove', () => { gallery.splice(i, 1); renderGallery(); markDirty(); })
-      );
-      right.append(cap, alt, tools);
-      card.append(img, right);
-      box.appendChild(card);
-    });
-  }
-
-  // ---------- images ----------
-  async function processFile(file) {
-    const bmp = await createImageBitmap(file);
-    const max = 1600;
-    const scale = Math.min(1, max / Math.max(bmp.width, bmp.height));
-    const w = Math.round(bmp.width * scale), h = Math.round(bmp.height * scale);
-    const c = document.createElement('canvas');
-    c.width = w; c.height = h;
-    const x = c.getContext('2d');
-    x.fillStyle = '#f4eddf'; x.fillRect(0, 0, w, h);
-    x.drawImage(bmp, 0, 0, w, h);
-    const url = c.toDataURL('image/jpeg', 0.85);
-    const slug = file.name.replace(/\.[^.]+$/, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'photo';
-    return { src: `images/${Date.now()}-${Math.random().toString(36).slice(2, 6)}-${slug}.jpg`, preview: url, b64: url.split(',')[1], alt: '', caption: '' };
-  }
-
-  $('#issue-file').addEventListener('change', async (e) => {
-    const f = e.target.files[0]; e.target.value = '';
-    if (!f) return;
-    try { const p = await processFile(f); issueImage = { src: p.src, alt: '', preview: p.preview, b64: p.b64 }; renderIssuePhoto(); markDirty(); }
-    catch (err) { status('Could not read that image: ' + err.message); }
-  });
-  $('#gallery-file').addEventListener('change', async (e) => {
-    const files = [...e.target.files]; e.target.value = '';
-    for (const f of files) {
-      try { gallery.push(await processFile(f)); } catch (err) { status('Skipped ' + f.name + ': ' + err.message); }
-    }
-    renderGallery(); markDirty();
-  });
-
-  // ---------- load ----------
-  async function load() {
-    status('Loading…');
-    let content = {};
-    try {
-      const f = await api('/contents/content.json?ref=' + encodeURIComponent(cfg.branch));
-      const bytes = Uint8Array.from(atob(f.content.replace(/\s/g, '')), (c) => c.charCodeAt(0));
-      content = JSON.parse(new TextDecoder().decode(bytes));
-    } catch (e) {
-      if (e.status !== 404) throw e;
-    }
-    text = { ...(content.text || {}) };
-    issueImage = content.issueImage && content.issueImage.src ? { src: content.issueImage.src, alt: content.issueImage.alt || '' } : null;
-    gallery = (content.gallery || []).filter((g) => g && g.src).map((g) => ({ src: g.src, alt: g.alt || '', caption: g.caption || '' }));
-    existing = new Set([...(issueImage ? [issueImage.src] : []), ...gallery.map((g) => g.src)]);
-    buildFields(); renderIssuePhoto(); renderGallery();
-    $('#editor').hidden = false;
-    $('#bar').hidden = false;
-    dirty = false;
-    status('Loaded. Make your changes, then publish.');
-  }
-
-  $('#connect-btn').addEventListener('click', async () => {
-    cfg = { owner: $('#owner').value.trim(), repo: $('#repo').value.trim(), branch: $('#branch').value.trim() || 'main', token: $('#token').value.trim() };
-    if (!cfg.owner || !cfg.repo || !cfg.token) { alert('Fill in username, repository and token.'); return; }
-    try {
-      await load();
-      try { localStorage.setItem(CFG_KEY, JSON.stringify(cfg)); } catch (e) {}
-    } catch (e) { $('#bar').hidden = false; status(friendly(e)); }
-  });
-  $('#disconnect-btn').addEventListener('click', () => {
-    try { localStorage.removeItem(CFG_KEY); } catch (e) {}
-    $('#token').value = ''; $('#editor').hidden = true; $('#bar').hidden = true; cfg = null;
-  });
-
-  // ---------- publish (one commit with all changes) ----------
-  $('#publish').addEventListener('click', async () => {
-    const btn = $('#publish');
-    btn.disabled = true;
-    try {
-      status('Publishing…');
-      const ref = await api('/git/ref/heads/' + encodeURIComponent(cfg.branch));
-      const parent = ref.object.sha;
-      const commit = await api('/git/commits/' + parent);
-      const tree = [];
-      const keep = new Set();
-      const all = [...(issueImage ? [issueImage] : []), ...gallery];
-      for (const g of all) {
-        keep.add(g.src);
-        if (g.b64) {
-          const blob = await api('/git/blobs', { method: 'POST', body: JSON.stringify({ content: g.b64, encoding: 'base64' }) });
-          tree.push({ path: g.src, mode: '100644', type: 'blob', sha: blob.sha });
-        }
-      }
-      existing.forEach((p) => { if (!keep.has(p)) tree.push({ path: p, mode: '100644', type: 'blob', sha: null }); });
-      const out = {
-        text,
-        issueImage: issueImage ? { src: issueImage.src, alt: issueImage.alt || '' } : null,
-        gallery: gallery.map((g) => ({ src: g.src, alt: g.alt || '', caption: g.caption || '' }))
+  <dialog class="admin-dialog" id="admin-dialog" aria-labelledby="admin-heading">
+    <div class="admin-inner">
+      <p class="eyebrow">Backpocket site desk</p>
+      <h2 id="admin-heading">Edit this issue.</h2>
+      <p class="admin-warning"><strong>Local editor, not a secure login.</strong> Changes are saved only in this browser. Export the updated HTML to publish it. Don’t enter subscriber, order, payment, or other private information here.</p>
+      <div class="admin-fields">
+        <label>Top line <input data-admin-field="tagline" maxlength="120"></label>
+        <label>About Backpocket <textarea data-admin-field="intro" maxlength="500"></textarea></label>
+        <label>Issue title <input data-admin-field="issue-title" maxlength="120"></label>
+        <label>Issue description <textarea data-admin-field="issue-summary" maxlength="600"></textarea></label>
+        <label>Order heading <input data-admin-field="order-title" maxlength="120"></label>
+        <label>Order information <textarea data-admin-field="order-info" maxlength="600"></textarea></label>
+      </div>
+      <div class="admin-actions">
+        <button type="button" id="admin-save">Save on this device</button>
+        <button type="button" id="admin-export">Export updated website</button>
+        <button type="button" class="secondary" id="admin-reset">Restore original copy</button>
+        <button type="button" class="secondary" id="admin-close">Close</button>
+      </div>
+      <p class="admin-status" id="admin-status" role="status" aria-live="polite"></p>
+    </div>
+  </dialog>
+  <script id="admin-script">
+    (() => {
+      const storageKey = 'backpocket-admin-content-v1';
+      const targets = [...document.querySelectorAll('[data-admin-key]')];
+      const fields = [...document.querySelectorAll('[data-admin-field]')];
+      const defaults = Object.fromEntries(targets.map((element) => [element.dataset.adminKey, element.textContent]));
+      const dialog = document.getElementById('admin-dialog');
+      const status = document.getElementById('admin-status');
+      const values = () => Object.fromEntries(fields.map((field) => [field.dataset.adminField, field.value.trim()]));
+      const reflect = (content) => {
+        targets.forEach((element) => {
+          if (typeof content[element.dataset.adminKey] === 'string') {
+            element.textContent = content[element.dataset.adminKey];
+          }
+        });
+        fields.forEach((field) => {
+          field.value = targets.find((element) => element.dataset.adminKey === field.dataset.adminField)?.textContent ?? '';
+        });
       };
-      const cj = await api('/git/blobs', { method: 'POST', body: JSON.stringify({ content: JSON.stringify(out, null, 2) + '\n', encoding: 'utf-8' }) });
-      tree.push({ path: 'content.json', mode: '100644', type: 'blob', sha: cj.sha });
-      const nt = await api('/git/trees', { method: 'POST', body: JSON.stringify({ base_tree: commit.tree.sha, tree }) });
-      const nc = await api('/git/commits', { method: 'POST', body: JSON.stringify({ message: 'Update site content (admin)', tree: nt.sha, parents: [parent] }) });
-      await api('/git/refs/heads/' + encodeURIComponent(cfg.branch), { method: 'PATCH', body: JSON.stringify({ sha: nc.sha }) });
-      all.forEach((g) => { delete g.b64; });
-      existing = keep;
-      dirty = false;
-      status('Published! The live site updates in about a minute.');
-    } catch (e) {
-      status('Could not publish: ' + friendly(e));
-    } finally { btn.disabled = false; }
-  });
 
-  // ---------- init ----------
-  const g = guess();
-  $('#owner').value = g.owner; $('#repo').value = g.repo;
-  try {
-    const saved = JSON.parse(localStorage.getItem(CFG_KEY) || 'null');
-    if (saved && saved.token) {
-      cfg = saved;
-      $('#owner').value = cfg.owner; $('#repo').value = cfg.repo; $('#branch').value = cfg.branch; $('#token').value = cfg.token;
-      load().catch((e) => { $('#bar').hidden = false; status(friendly(e)); });
-    }
-  } catch (e) {}
-})();
-</script>
+      try {
+        const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+        reflect(saved && typeof saved === 'object' ? saved : {});
+      } catch (error) {
+        status.textContent = 'This browser could not read saved edits. You can still edit and export a copy.';
+      }
+
+      document.getElementById('admin-open').addEventListener('click', (event) => {
+        event.preventDefault();
+        dialog.showModal();
+      });
+      document.getElementById('admin-close').addEventListener('click', () => dialog.close());
+      document.getElementById('admin-save').addEventListener('click', () => {
+        const content = values();
+        reflect(content);
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(content));
+          status.textContent = 'Saved on this device. Export the website HTML when you are ready to publish.';
+        } catch (error) {
+          status.textContent = 'Edits are showing in this page, but this browser could not save them. Export the website to keep them.';
+        }
+      });
+      document.getElementById('admin-reset').addEventListener('click', () => {
+        try { localStorage.removeItem(storageKey); } catch (error) { /* Reset the visible copy even if storage is blocked. */ }
+        reflect(defaults);
+        status.textContent = 'Original copy restored in this page.';
+      });
+      document.getElementById('admin-export').addEventListener('click', () => {
+        reflect(values());
+        const copy = document.documentElement.cloneNode(true);
+        copy.querySelector('#admin-dialog')?.remove();
+        copy.querySelector('#admin-open')?.closest('p')?.remove();
+        copy.querySelector('#admin-script')?.remove();
+        copy.querySelector('style')?.insertAdjacentHTML('beforeend', '');
+        const html = '<!doctype html>\n' + copy.outerHTML;
+        const file = new Blob([html], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(file);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'backpocket-site.html';
+        link.click();
+        URL.revokeObjectURL(url);
+        status.textContent = 'Exported backpocket-site.html. Upload that file to publish the edited copy.';
+      });
+    })();
+  </script>
+  <script>
+    (() => {
+      const deadline = new Date('2027-01-01T00:00:00+01:00');
+      const days = document.getElementById('release-countdown-days');
+      const label = document.getElementById('release-countdown-label');
+      const description = document.getElementById('release-countdown-description');
+      const remaining = Math.ceil((deadline.getTime() - Date.now()) / 86400000);
+      if (remaining > 0) {
+        days.textContent = String(remaining);
+        label.textContent = remaining === 1 ? 'day to target' : 'days to target';
+        description.textContent = `Backpocket is working toward a first-issue release on January 1, 2027 — ${remaining} ${remaining === 1 ? 'day' : 'days'} from today. This is a target, not a promise of postal arrival; print and mailing arrangements still need to be confirmed.`;
+      } else if (remaining === 0) {
+        days.textContent = 'Today';
+        label.textContent = 'target date';
+        description.textContent = 'January 1, 2027 is the first-issue release target. Check the current issue and order details below; postal arrival timing is not guaranteed.';
+      } else {
+        days.textContent = 'Target date passed';
+        label.textContent = 'update the release date';
+        description.textContent = 'The January 1, 2027 target has passed. Update this date to the current release plan; no postal arrival date is promised.';
+      }
+    })();
+  </script>
 </body>
 </html>
