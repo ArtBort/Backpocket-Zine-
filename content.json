@@ -11,6 +11,9 @@
     "order-title": "A pocket gallery, by post.",
     "order-info": "Monthly issues are planned for Backpocket, a pocket gallery for artists to share work, with the first issue targeting January 1, 2027. Sign-ups are not open yet. Ordering is not open on this draft site, and it does not collect subscriptions, orders, payments, or donations. An optional donation may be offered to support the zine, but no donation method is set up. Price and postage details still need to be confirmed, along with the format, print and mailing schedule, subscription terms, and payment method, before sign-ups open. The release target is not a promise of postal arrival. If you want to hear when subscriptions open, check back here for a real signup link once it is ready."
   },
-  "issueImage": null,
+  "issueImage": {
+    "src": "images/1793873754818-c9tf-zine-v3-cover.jpg",
+    "alt": ""
+  },
   "gallery": []
 }
