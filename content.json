@@ -34,8 +34,8 @@
     "artists-button": "Send my work",
     "artists-success": "Thank you! We got your submission and will be in touch.",
     "gallery-eyebrow": "Peek inside",
-    "foot-brand": "backpocket.",
-    "foot-text": "Independent. Artist-made. Free.",
+    "foot-brand": "HumanMade.",
+    "foot-text": "Collaborative Self published Zine.",
     "thanks-eyebrow": "You’re on the list",
     "thanks-title": "Thank you!",
     "thanks-text": "The zine will be sent to your inbox.",
@@ -44,16 +44,24 @@
     "thanks-no": "No thanks, back to the site"
   },
   "colors": {
-    "ink": "#223b4e",
-    "tomato": "#d9b536"
+    "paper": "#272627",
+    "ink": "#ffffff",
+    "muted": "#ffffff",
+    "tomato": "#ffd747",
+    "blue": "#7a9490",
+    "yellow": "#997300"
   },
   "fonts": {
     "heading": {
       "type": "upload",
-      "name": "Lexi1-Regular",
-      "src": "fonts/1794139368983-lexi1-regular.ttf"
+      "name": "SunnyBrunch-Bold",
+      "src": "fonts/1794139948694-sunnybrunch-bold.ttf"
     },
-    "body": null
+    "body": {
+      "type": "upload",
+      "name": "SunnyBrunch-Bold",
+      "src": "fonts/1794139998044-sunnybrunch-bold.ttf"
+    }
   },
   "meta": {
     "title": "Backpocket a portable gallery ",
