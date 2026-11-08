@@ -41,15 +41,23 @@
     "thanks-text": "The zine will be sent to your inbox.",
     "thanks-ask": "Backpocket is free and always will be. If you’d like to help cover the cost of making it, you can chip in.",
     "thanks-other": "Other amount",
-    "thanks-no": "No thanks, back to the site"
+    "thanks-no": "No thanks, back to the site",
+    "nav-what": "What is it",
+    "what-eyebrow": "What is it",
+    "what-title": "What is Backpocket?",
+    "what-text": "Backpocket is an independent, monthly pocket-gallery zine made by multiple artists for your enjoyment. Each issue brings together small collages, drawings and words from different artists, sent straight to your inbox.",
+    "what-fact-1": "Made by independent artists",
+    "what-fact-2": "Free to read",
+    "what-fact-3": "A new issue every month",
+    "thanks-paypal": "Contribute with PayPal"
   },
   "colors": {
     "paper": "#272627",
     "ink": "#ffffff",
-    "muted": "#ffffff",
+    "muted": "#ffe229",
     "tomato": "#ffd747",
     "blue": "#7a9490",
-    "yellow": "#997300"
+    "yellow": "#e4af11"
   },
   "fonts": {
     "heading": {
@@ -64,12 +72,13 @@
     }
   },
   "meta": {
-    "title": "Backpocket a portable gallery ",
+    "title": "Backpocket_Zine a portable gallery ",
     "description": "Backpocket is an independent monthly pocket-gallery zine made by multiple artists for your enjoyment."
   },
   "settings": {
     "formKey": "557b8e21-aad8-4e00-98ad-b8100b33d8fe",
-    "paypal": ""
+    "artistKey": "71ffa83d-bea8-4a00-9d43-4937a54b4d16",
+    "paypal": "https://www.paypal.com/donate/?hosted_button_id=VMB74DTVESJ6W"
   },
   "heroImage": {
     "src": "images/1794139286247-rf7o-cover-zine.png",
