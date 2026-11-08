@@ -4,9 +4,9 @@
     "brand": "backpocket.",
     "nav-copy": "Get your copy",
     "nav-artists": "Be in the zine",
-    "hero-eyebrow": "HUMAN MADE",
-    "hero-name": "Backpocket",
-    "hero-tag": "Zine",
+    "hero-eyebrow": "WHATS IN YOUR",
+    "hero-name": "BAcKpocket",
+    "hero-tag": "This  Month",
     "hero-intro": " sent to your inbox every month. Free to read, self-published with love.",
     "hero-btn-copy": "Get your free copy",
     "hero-btn-artists": "Get published",
@@ -44,7 +44,8 @@
     "thanks-no": "No thanks, back to the site"
   },
   "colors": {
-    "ink": "#223b4e"
+    "ink": "#223b4e",
+    "tomato": "#d9b536"
   },
   "fonts": {
     "heading": {
