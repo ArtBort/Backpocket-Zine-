@@ -43,7 +43,7 @@
     "thanks-other": "Other amount",
     "thanks-no": "No thanks, back to the site",
     "nav-what": "whats up",
-    "what-eyebrow": "FIRST EDITION",
+    "what-eyebrow": "\nFIRST EDITION",
     "what-title": "what is Backpocket ?",
     "what-text": "Its a self published Zine made by multiple artists for your enjoyment. \nEach issue brings together people to create and share there work in our pocket sized gallery, every month straight to your inbox.",
     "what-fact-1": "Self published",
@@ -68,10 +68,10 @@
       "size": 0.7
     },
     "hero-eyebrow": {
-      "size": 1.45
+      "size": 1.25
     },
     "hero-name": {
-      "size": 1.5
+      "size": 1.15
     },
     "hero-tag": {
       "size": 0.8
@@ -80,8 +80,8 @@
       "size": 0.9
     },
     "what-eyebrow": {
-      "size": 1.1,
-      "color": "#f9c815"
+      "color": "#f9c815",
+      "size": 1.1
     },
     "what-title": {
       "size": 0.95
