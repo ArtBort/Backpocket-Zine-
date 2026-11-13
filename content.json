@@ -6,7 +6,7 @@
     "nav-artists": "Be in the zine",
     "hero-eyebrow": "WHATS IN YOUR",
     "hero-name": "BAcKpocket",
-    "hero-tag": "This  Month",
+    "hero-tag": "this  Month",
     "hero-intro": "sent to your inbox every month.",
     "hero-btn-copy": "Get your free copy",
     "hero-btn-artists": "Get published",
@@ -42,7 +42,7 @@
     "thanks-ask": "Backpocket is free and always will be. If you’d like to help cover the cost of making it, you can chip in.",
     "thanks-other": "Other amount",
     "thanks-no": "No thanks, back to the site",
-    "nav-what": "What is it",
+    "nav-what": "whats up",
     "what-eyebrow": "FIRST EDITION",
     "what-title": "what is Backpocket ?",
     "what-text": "Its a self published Zine made by multiple artists for your enjoyment. \nEach issue brings together people to create and share there work in our pocket sized gallery, every month straight to your inbox.",
@@ -63,7 +63,42 @@
     "heading": 1.3,
     "body": 1.5
   },
-  "styles": {},
+  "styles": {
+    "brand": {
+      "size": 0.7
+    },
+    "hero-eyebrow": {
+      "size": 1.45
+    },
+    "hero-name": {
+      "size": 1.5
+    },
+    "hero-tag": {
+      "size": 0.8
+    },
+    "hero-intro": {
+      "size": 0.9
+    },
+    "what-eyebrow": {
+      "size": 1.1,
+      "color": "#f9c815"
+    },
+    "what-title": {
+      "size": 0.95
+    },
+    "signup-eyebrow": {
+      "color": "#ffd84d"
+    },
+    "artists-eyebrow": {
+      "color": "#fbd037"
+    },
+    "gallery-eyebrow": {
+      "color": "#fcff57"
+    },
+    "thanks-title": {
+      "color": "#ffd505"
+    }
+  },
   "fonts": {
     "heading": {
       "type": "upload",
