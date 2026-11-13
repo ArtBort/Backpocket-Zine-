@@ -44,11 +44,11 @@
     "thanks-no": "No thanks, back to the site",
     "nav-what": "whats up",
     "what-eyebrow": "\nFIRST EDITION",
-    "what-title": "what is Backpocket ?",
-    "what-text": "Its a self published Zine made by multiple artists for your enjoyment. \nEach issue brings together people to create and share there work in our pocket sized gallery, every month straight to your inbox.",
+    "what-title": "self published Zine made by multiple artists for your enjoyment. \nEach issue brings together people to create and share there work in our pocket sized gallery, every month straight to your inbox.",
+    "what-text": "What is backpocket?",
     "what-fact-1": "Self published",
     "what-fact-2": "Free to read",
-    "what-fact-3": "A new issue every month",
+    "what-fact-3": "pocket sized art gallery",
     "thanks-paypal": "Contribute with PayPal"
   },
   "colors": {
@@ -84,7 +84,7 @@
       "size": 1.1
     },
     "what-title": {
-      "size": 0.95
+      "size": 0.4
     },
     "signup-eyebrow": {
       "color": "#ffd84d"
@@ -97,6 +97,9 @@
     },
     "thanks-title": {
       "color": "#ffd505"
+    },
+    "what-text": {
+      "size": 2.2
     }
   },
   "fonts": {
