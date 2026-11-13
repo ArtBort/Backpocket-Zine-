@@ -75,6 +75,12 @@
     "title": "Backpocket_Zine a portable gallery ",
     "description": "Backpocket is an independent monthly pocket-gallery zine made by multiple artists for your enjoyment."
   },
+  "socials": [
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/backpocket_zine/"
+    }
+  ],
   "settings": {
     "formKey": "557b8e21-aad8-4e00-98ad-b8100b33d8fe",
     "artistKey": "71ffa83d-bea8-4a00-9d43-4937a54b4d16",
