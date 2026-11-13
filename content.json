@@ -24,7 +24,7 @@
     "signup-consent": "I agree that Backpocket may use my email address to send me the zine.",
     "signup-button": "Send",
     "artists-eyebrow": "For artists",
-    "artists-title": "Want to be in the zine?",
+    "artists-title": "Want to join  our collective ?",
     "artists-text": "Backpocket\nis an art collective that publishes work of \ninterdependent artists in a monthly Zine.\nTell us who you are and what you do. \nwe welcome all submissions \nthank you",
     "artists-name-label": "Your name or artist name",
     "artists-email-label": "Your email",
@@ -100,6 +100,9 @@
     },
     "what-text": {
       "size": 2.2
+    },
+    "artists-title": {
+      "size": 0.75
     }
   },
   "fonts": {
