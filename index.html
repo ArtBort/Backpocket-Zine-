@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#f4eddf" name="theme-color"/>
+<meta content="Backpocket is a free zine made by independent artists. Get your copy by email or send in your own work to be published." name="description"/>
+<script>
+    // bp-early: apply the saved look before the first paint and hide the page until the latest content is loaded
+    (function () {
+      var root = document.documentElement;
+      root.classList.add('bp-loading');
+      try {
+        var t = JSON.parse(localStorage.getItem('bp-theme') || 'null');
+        if (t) {
+          var c = t.colors || {};
+          ['paper', 'ink', 'muted', 'tomato', 'blue', 'yellow'].forEach(function (k) {
+            if (/^#[0-9a-f]{6}$/i.test(c[k] || '')) root.style.setProperty('--' + k, c[k]);
+          });
+          var fv = t.fontVars || {};
+          Object.keys(fv).forEach(function (k) { if (k === '--serif' || k === '--sans') root.style.setProperty(k, fv[k]); });
+          (t.links || []).forEach(function (h) {
+            if (/^https:\/\/fonts\.googleapis\.com\//.test(h)) { var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = h; l.setAttribute('data-bp-font', '1'); document.head.appendChild(l); }
+          });
+          (t.css || []).forEach(function (css) { var st = document.createElement('style'); st.textContent = css; st.setAttribute('data-bp-font', '1'); document.head.appendChild(st); });
+        }
+      } catch (e) {}
+      setTimeout(function () { root.classList.remove('bp-loading'); }, 2500);
+    })();
+  </script>
+<title>Backpocket — a free zine by artists</title>
+<style>
+    :root {
+      --paper: #f4eddf;
+      --ink: #192b25;
+      --muted: #526158;
+      --tomato: #d95436;
+      --blue: #8db6b0;
+      --yellow: #e6bd45;
+      --line: color-mix(in srgb, var(--ink) 28%, transparent);
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: 'Trebuchet MS', Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--paper); }
+    html.bp-loading body { opacity: 0; }
+    body { transition: opacity .25s ease; }
+    @media (prefers-reduced-motion: reduce) { body { transition: none; } }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); line-height: 1.5; }
+    a { color: inherit; }
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--tomato); outline-offset: 3px; }
+    .skip-link { position: absolute; z-index: 10; top: 8px; left: 8px; padding: 10px 14px; color: var(--paper); background: var(--ink); transform: translateY(-150%); }
+    .skip-link:focus { transform: translateY(0); }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    header { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; border-bottom: 1px solid var(--line); }
+    .brand { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; text-decoration: none; letter-spacing: -.06em; }
+    nav { display: flex; gap: clamp(14px, 3vw, 34px); font-size: .9rem; }
+    nav a { display: inline-flex; min-height: 44px; align-items: center; text-decoration: none; border-bottom: 1px solid transparent; }
+    nav a:hover { border-color: var(--ink); }
+    .hero { min-height: 560px; display: grid; grid-template-columns: 1.02fr .98fr; align-items: center; gap: 5vw; padding: 64px 0 76px; }
+    .eyebrow { font-size: .73rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 650px; margin: 17px 0 18px; font: 700 clamp(3.4rem, 9vw, 7.2rem)/.85 var(--serif); letter-spacing: -.08em; }
+    h1 span { display: block; color: var(--tomato); font-style: italic; font-weight: 400; }
+    .intro { max-width: 470px; font: 1.16rem/1.55 var(--serif); }
+    .actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+    .button { display: inline-flex; justify-content: center; align-items: center; min-height: 48px; padding: 12px 20px; color: var(--paper); background: var(--ink); font: 700 .85rem var(--sans); text-decoration: none; border: 2px solid var(--ink); border-radius: 2px; cursor: pointer; }
+    .button:hover { color: var(--ink); background: transparent; }
+    .button.alt { color: var(--ink); background: transparent; }
+    .button.alt:hover { color: var(--paper); background: var(--ink); }
+    .artboard { position: relative; min-height: 420px; display: grid; place-items: center; }
+    .sun { position: absolute; top: 5%; right: 13%; width: 114px; aspect-ratio: 1; background: var(--yellow); border-radius: 50%; }
+    .cover { position: relative; z-index: 1; width: min(74%, 330px); aspect-ratio: .73; padding: 23px; overflow: hidden; transform: rotate(4deg); background: var(--tomato); box-shadow: 12px 16px 0 color-mix(in srgb, var(--ink) 19%, transparent); }
+    .cover:before { content: ''; position: absolute; width: 230px; height: 230px; top: 25%; left: 14%; background: var(--blue); border-radius: 50% 48% 40% 55%; transform: rotate(-24deg); }
+    .cover:after { content: ''; position: absolute; width: 110px; height: 220px; top: 28%; left: 39%; background: var(--yellow); clip-path: polygon(50% 0, 100% 50%, 54% 100%, 0 48%); transform: rotate(17deg); }
+    .cover-title { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: flex-start; color: var(--paper); font: 700 clamp(2.7rem, 6vw, 4.5rem)/.8 var(--serif); letter-spacing: -.09em; }
+    .cover-title small { font: 700 .65rem/1 var(--sans); letter-spacing: .12em; writing-mode: vertical-rl; }
+    .cover-note { position: absolute; z-index: 3; left: 22px; bottom: 20px; color: var(--ink); font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .tape { position: absolute; z-index: 4; top: 10%; left: 5%; width: 100px; height: 24px; background: color-mix(in srgb, var(--paper) 65%, transparent); transform: rotate(-35deg); }
+    .scribble { position: absolute; right: 3%; bottom: 10%; z-index: 2; width: 100px; color: var(--ink); font: italic 1rem var(--serif); transform: rotate(9deg); }
+    section { padding: 72px 0; border-top: 1px solid var(--line); }
+    h2 { margin: 12px 0 16px; font: 700 clamp(2.4rem, 5vw, 4.4rem)/.92 var(--serif); letter-spacing: -.07em; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; align-items: start; }
+    .lede { max-width: 440px; margin: 0; font: 1.1rem/1.55 var(--serif); }
+    .form { display: grid; gap: 14px; padding: clamp(20px, 4vw, 34px); background: color-mix(in srgb, var(--paper) 50%, white); border: 1px solid var(--ink); box-shadow: 8px 10px 0 color-mix(in srgb, var(--ink) 15%, transparent); }
+    .form label { display: grid; gap: 6px; font-size: .82rem; font-weight: 700; }
+    .form input:not([type=checkbox]), .form textarea { width: 100%; padding: 12px; color: var(--ink); background: var(--paper); border: 1px solid var(--ink); border-radius: 0; font: 1rem/1.4 var(--sans); }
+    .form textarea { min-height: 110px; resize: vertical; }
+    .form label.check { display: flex; align-items: flex-start; gap: 10px; font-weight: 400; font-size: .85rem; }
+    .form label.check input { margin-top: 4px; }
+    .form .button { justify-self: start; }
+    .form .button:disabled { opacity: .55; cursor: wait; }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+    .form-ok { margin: 0; padding: 12px 14px; background: var(--yellow); font-size: .92rem; }
+    .form-err { margin: 0; color: #9b1c1c; font-size: .9rem; }
+    .facts { margin: 26px 0 0; padding: 0; list-style: none; max-width: 440px; }
+    .facts li { padding: 12px 0; border-top: 1px solid var(--line); font: 700 1.05rem var(--serif); }
+    .facts li:last-child { border-bottom: 1px solid var(--line); }
+    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 22px; }
+    .gallery figure { margin: 0; }
+    .gallery img { display: block; width: 100%; height: auto; background: var(--blue); border: 1px solid var(--ink); box-shadow: 8px 10px 0 color-mix(in srgb, var(--ink) 15%, transparent); }
+    .gallery .gal-btn { display: block; width: 100%; margin: 0; padding: 0; color: inherit; background: none; border: 0; cursor: zoom-in; }
+    #lightbox { width: min(980px, calc(100% - 32px)); }
+    .lb-body { position: relative; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+    .lb-body.solo { grid-template-columns: minmax(0, 1fr); }
+    .lb-body img { display: block; width: 100%; height: auto; max-height: 84vh; object-fit: contain; background: color-mix(in srgb, var(--ink) 8%, var(--paper)); }
+    .lb-text { display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: clamp(22px, 4vw, 38px); }
+    .lb-text h3 { margin: 0; font: 700 clamp(1.7rem, 3.2vw, 2.4rem)/1.02 var(--serif); letter-spacing: -.05em; }
+    .lb-text p { margin: 0; font: 1.02rem/1.65 var(--serif); white-space: pre-line; }
+    .lb-body .dlg-close { z-index: 2; top: 10px; right: 10px; width: 42px; height: 42px; background: var(--paper); border: 1px solid var(--ink); }
+    .gallery figcaption { margin-top: 14px; color: var(--muted); font-size: .85rem; }
+    footer { padding: 35px 0 45px; border-top: 1px solid var(--line); }
+    .footer-row { display: flex; justify-content: space-between; gap: 25px; align-items: start; }
+    .footer-row p { max-width: 430px; margin: 4px 0 0; color: var(--muted); font-size: .8rem; }
+    .foot-brand { font: 700 1.5rem var(--serif); letter-spacing: -.06em; }
+    .socials { display: flex; flex-wrap: wrap; gap: 6px 30px; margin: 28px 0 0; padding: 0; list-style: none; }
+    .socials a { display: inline-flex; align-items: center; min-height: 52px; font-weight: 700; font-size: 1.25rem; letter-spacing: .01em; text-underline-offset: 5px; text-decoration-thickness: 2px; }
+    .admin-link { color: var(--muted); font-size: .75rem; text-underline-offset: 3px; }
+    dialog { padding: 0; width: min(480px, calc(100% - 32px)); color: var(--ink); background: var(--paper); border: 2px solid var(--ink); box-shadow: 10px 12px 0 color-mix(in srgb, var(--ink) 25%, transparent); }
+    dialog::backdrop { background: color-mix(in srgb, var(--ink) 60%, transparent); }
+    .dlg-body { position: relative; padding: clamp(24px, 5vw, 36px); }
+    .dlg-body h2 { font-size: clamp(2.2rem, 7vw, 3.2rem); }
+    .dlg-body p { margin-bottom: 14px; }
+    .dlg-close { position: absolute; top: 8px; right: 8px; width: 44px; height: 44px; color: var(--ink); background: transparent; border: 0; font-size: 1.8rem; line-height: 1; cursor: pointer; }
+    .amounts { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 16px; }
+    .textbtn { padding: 8px 0; color: var(--muted); background: none; border: 0; font: .85rem var(--sans); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+    [data-admin-key] { white-space: pre-line; }
+    .artboard.has-photo { min-height: 0; display: block; }
+    .artboard.has-photo > :not(img) { display: none; }
+    .artboard > img { display: block; width: 100%; height: auto; }
+    @media (max-width: 700px) {
+      .wrap { width: min(100% - 30px, 540px); }
+      header { gap: 8px 18px; }
+      nav { gap: 4px 12px; font-size: .82rem; }
+      .hero { min-height: 0; grid-template-columns: 1fr; gap: 5px; padding: 48px 0 36px; }
+      h1 { font-size: clamp(3.6rem, 17vw, 6rem); }
+      .artboard { min-height: 365px; }
+      .cover { width: min(67%, 280px); }
+      section { padding: 52px 0; }
+      .split { grid-template-columns: 1fr; gap: 24px; }
+      .lb-body { grid-template-columns: minmax(0, 1fr); }
+      .lb-body img { max-height: 60vh; }
+      .footer-row { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#home">Skip to main content</a>
+<div class="wrap">
+<header>
+<a aria-label="Backpocket home" class="brand" data-admin-key="brand" href="#home">backpocket.</a>
+<nav aria-label="Main navigation">
+<a data-admin-key="nav-what" href="#what">What is it</a><a data-admin-key="nav-copy" href="#signup">Get your copy</a><a data-admin-key="nav-artists" href="#artists">Be in the zine</a>
+</nav>
+</header>
+<main id="home" tabindex="-1">
+
+<section aria-labelledby="hero-title" class="hero" style="border:0">
+<div>
+<div class="eyebrow" data-admin-key="hero-eyebrow">Free · monthly · made by artists</div>
+<h1 id="hero-title"><x-t data-admin-key="hero-name">Backpocket</x-t> <span data-admin-key="hero-tag">a free zine.</span></h1>
+<p class="intro" data-admin-key="hero-intro">Small collages, drawings and words from independent artists, sent to your inbox every month. Free to read, self-published with love.</p>
+<div class="actions"><a class="button" data-admin-key="hero-btn-copy" href="#signup">Get your free copy</a><a class="button alt" data-admin-key="hero-btn-artists" href="#artists">Get published</a></div>
+</div>
+<div aria-label="Abstract collage illustration in the colors of the Backpocket cover" class="artboard" id="hero-art" role="img">
+<div class="sun"></div><div class="scribble"><x-t data-admin-key="cover-scribble-1">cut, keep,</x-t><br/><x-t data-admin-key="cover-scribble-2">rearrange</x-t></div>
+<div class="cover"><div class="tape"></div><div class="cover-title"><x-t data-admin-key="cover-title-1">back</x-t><br/><x-t data-admin-key="cover-title-2">pocket</x-t><small data-admin-key="cover-small">an artist zine</small></div><div class="cover-note" data-admin-key="cover-note">free · monthly</div></div>
+</div>
+</section>
+
+<section aria-labelledby="what-title" id="what">
+<div class="split">
+<div>
+<div class="eyebrow" data-admin-key="what-eyebrow">What is it</div>
+<h2 id="what-title" data-admin-key="what-title">What is Backpocket?</h2>
+</div>
+<div>
+<p class="lede" data-admin-key="what-text">Backpocket is an independent, monthly pocket-gallery zine made by multiple artists for your enjoyment. Each issue brings together small collages, drawings and words from different artists, sent straight to your inbox.</p>
+<ul class="facts">
+<li data-admin-key="what-fact-1">Made by independent artists</li>
+<li data-admin-key="what-fact-2">Free to read</li>
+<li data-admin-key="what-fact-3">A new issue every month</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="signup-title" id="signup">
+<div class="split">
+<div>
+<div class="eyebrow" data-admin-key="signup-eyebrow">Get your copy</div>
+<h2 id="signup-title" data-admin-key="signup-title">Free, in your inbox.</h2>
+<p class="lede" data-admin-key="signup-text">Leave your email and every new issue is sent to you. It costs nothing.</p>
+</div>
+<form class="form" data-kind="signup" id="signup-form">
+<label><span data-admin-key="signup-name-label">Your name (optional)</span><input autocomplete="name" name="name" type="text"/></label>
+<label><span data-admin-key="signup-email-label">Your email</span><input autocomplete="email" name="email" required="" type="email"/></label>
+<label class="check"><input name="consent" required="" type="checkbox"/><span data-admin-key="signup-consent">I agree that Backpocket may use my email address to send me the zine.</span></label>
+<input aria-hidden="true" autocomplete="off" class="hp" name="botcheck" tabindex="-1" type="checkbox"/>
+<button class="button" data-admin-key="signup-button" type="submit">Send me the zine</button>
+<p class="form-err" hidden="" role="alert"></p>
+</form>
+</div>
+</section>
+
+<section aria-labelledby="artists-title" id="artists">
+<div class="split">
+<div>
+<div class="eyebrow" data-admin-key="artists-eyebrow">For artists</div>
+<h2 id="artists-title" data-admin-key="artists-title">Want to be in the zine?</h2>
+<p class="lede" data-admin-key="artists-text">We publish work by independent artists. Tell us who you are and send a link to your work.</p>
+</div>
+<form class="form" data-kind="artist" id="artist-form">
+<label><span data-admin-key="artists-name-label">Your name or artist name</span><input autocomplete="name" name="name" required="" type="text"/></label>
+<label><span data-admin-key="artists-email-label">Your email</span><input autocomplete="email" name="email" required="" type="email"/></label>
+<label><span data-admin-key="artists-link-label">Link to your work (website or Instagram)</span><input name="link" placeholder="https://" required="" type="url"/></label>
+<label><span data-admin-key="artists-about-label">Tell us about your work</span><textarea name="about"></textarea></label>
+<label class="check"><input name="consent" required="" type="checkbox"/><span data-admin-key="artists-consent">I agree that Backpocket may contact me about my submission.</span></label>
+<input aria-hidden="true" autocomplete="off" class="hp" name="botcheck" tabindex="-1" type="checkbox"/>
+<button class="button" data-admin-key="artists-button" type="submit">Send my work</button>
+<p class="form-ok" data-admin-key="artists-success" hidden="" role="status">Thank you! We got your submission and will be in touch.</p>
+<p class="form-err" hidden="" role="alert"></p>
+</form>
+</div>
+</section>
+
+<section aria-labelledby="gallery-title" hidden="" id="gallery">
+<div class="eyebrow" data-admin-key="gallery-eyebrow">Peek inside</div>
+<h2 id="gallery-title" data-admin-key="gallery-title">Pages &amp; scraps.</h2>
+<div class="gallery" id="gallery-grid"></div>
+</section>
+</main>
+<footer>
+<div class="footer-row">
+<div><div class="foot-brand" data-admin-key="foot-brand">backpocket.</div><p data-admin-key="foot-text">Independent. Artist-made. Free.</p></div>
+<a class="admin-link" href="admin/">Admin</a>
+</div>
+<ul aria-label="Social links" class="socials" hidden="" id="socials"></ul>
+</footer>
+</div>
+
+<dialog aria-labelledby="thanks-title" id="thanks">
+<div class="dlg-body">
+<button aria-label="Close" class="dlg-close" data-close="" type="button">×</button>
+<div class="eyebrow" data-admin-key="thanks-eyebrow">You’re on the list</div>
+<h2 id="thanks-title" data-admin-key="thanks-title">Thank you!</h2>
+<p data-admin-key="thanks-text">The zine will be sent to your inbox.</p>
+<p data-admin-key="thanks-ask" id="thanks-ask">Backpocket is free and always will be. If you’d like to help cover the cost of making it, you can chip in.</p>
+<div class="amounts" id="thanks-amounts"></div>
+<button class="textbtn" data-admin-key="thanks-no" data-close="" type="button">No thanks, back to the site</button>
+</div>
+</dialog>
+
+<dialog aria-label="Featured artwork" id="lightbox">
+<div class="lb-body solo" id="lb-body">
+<button aria-label="Close" class="dlg-close" data-close="" type="button">×</button>
+<img alt="" id="lb-img"/>
+<div class="lb-text"><h3 hidden="" id="lb-title"></h3><p hidden="" id="lb-desc"></p></div>
+</div>
+</dialog>
+
+<script>
+    // Forms, thank-you popup and PayPal buttons.
+    (() => {
+      const settings = { formKey: '', artistKey: '', paypal: '' };
+      const dlg = document.getElementById('thanks');
+      const amounts = document.getElementById('thanks-amounts');
+      const ask = document.getElementById('thanks-ask');
+
+      const paypalUrl = () => {
+        let u = (settings.paypal || '').trim();
+        if (!u) return null;
+        if (!/^https?:\/\//i.test(u)) u = 'https://' + u;
+        try {
+          const x = new URL(u);
+          if (x.protocol !== 'https:') return null;
+          return /(^|\.)paypal\.(me|com)$/i.test(x.hostname) ? x : null;
+        } catch (e) { return null; }
+      };
+
+      const buildAmounts = () => {
+        amounts.textContent = '';
+        const url = paypalUrl();
+        ask.hidden = !url;
+        amounts.hidden = !url;
+        if (!url) return;
+        const add = (href, label, key, alt) => {
+          const a = document.createElement('a');
+          a.className = 'button' + (alt ? ' alt' : '');
+          a.href = href; a.target = '_blank'; a.rel = 'noopener';
+          a.textContent = label;
+          if (key) a.setAttribute('data-admin-key', key);
+          amounts.appendChild(a);
+        };
+        const parts = url.pathname.split('/').filter(Boolean);
+        if (/(^|\.)paypal\.me$/i.test(url.hostname) && parts.length >= 1 && /^[\w.\-]+$/.test(parts[0])) {
+          const base = 'https://paypal.me/' + parts[0];
+          [3, 5, 10].forEach((n) => add(base + '/' + n + 'EUR', '€' + n));
+          add(base, 'Other amount', 'thanks-other', true);
+        } else {
+          add(url.href, 'Contribute with PayPal', 'thanks-paypal');
+        }
+      };
+
+      window.setSettings = (s) => {
+        s = s || {};
+        settings.formKey = String(s.formKey || '').trim();
+        settings.artistKey = String(s.artistKey || '').trim();
+        settings.paypal = String(s.paypal || '').trim();
+        buildAmounts();
+      };
+      window.renderSocials = (list) => {
+        const ul = document.getElementById('socials');
+        if (!ul) return;
+        ul.textContent = '';
+        let n = 0;
+        (Array.isArray(list) ? list : []).forEach((it) => {
+          if (!it) return;
+          const label = String(it.label || '').trim();
+          let url = String(it.url || '').trim();
+          if (!label || !url) return;
+          if (!/^(https?:|mailto:)/i.test(url)) url = 'https://' + url;
+          let u;
+          try { u = new URL(url); } catch (e) { return; }
+          if (['http:', 'https:', 'mailto:'].indexOf(u.protocol) < 0) return;
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = u.href;
+          a.textContent = label;
+          if (u.protocol !== 'mailto:') { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+          li.appendChild(a);
+          ul.appendChild(li);
+          n++;
+        });
+        ul.hidden = n === 0;
+      };
+      window.openThanks = () => { if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', ''); };
+      const lb = document.getElementById('lightbox');
+      [dlg, lb].forEach((box) => box.addEventListener('click', (e) => {
+        if (e.target === box || (e.target.closest && e.target.closest('[data-close]'))) { if (box.close) box.close(); else box.removeAttribute('open'); }
+      }));
+      window.openLightbox = (it, editing) => {
+        const title = editing ? (it.title || '') : (it.title || it.caption || '');
+        const desc = it.description || '';
+        const img = document.getElementById('lb-img');
+        img.src = it.src;
+        img.alt = it.alt || '';
+        const t = document.getElementById('lb-title');
+        const d = document.getElementById('lb-desc');
+        t.textContent = title; d.textContent = desc;
+        t.hidden = !editing && !title;
+        d.hidden = !editing && !desc;
+        document.getElementById('lb-body').classList.toggle('solo', !editing && !title && !desc);
+        if (lb.showModal) lb.showModal(); else lb.setAttribute('open', '');
+      };
+      window.renderGallery = (items) => {
+        const grid = document.getElementById('gallery-grid');
+        if (!grid) return 0;
+        grid.textContent = '';
+        const list = (Array.isArray(items) ? items : []).filter((g) => g && g.src);
+        list.forEach((g) => {
+          const fig = document.createElement('figure');
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'gal-btn';
+          const name = g.title || g.alt || '';
+          btn.setAttribute('aria-label', 'View larger' + (name ? ': ' + name : ''));
+          const img = document.createElement('img');
+          img.src = g.src;
+          img.alt = g.alt || '';
+          img.loading = 'lazy';
+          btn.appendChild(img);
+          btn.addEventListener('click', () => window.openLightbox(g));
+          fig.appendChild(btn);
+          if (g.caption) {
+            const cap = document.createElement('figcaption');
+            cap.textContent = g.caption;
+            fig.appendChild(cap);
+          }
+          grid.appendChild(fig);
+        });
+        const sec = document.getElementById('gallery');
+        if (sec) sec.hidden = list.length === 0;
+        return list.length;
+      };
+      buildAmounts();
+
+      document.querySelectorAll('form[data-kind]').forEach((form) => {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const kind = form.dataset.kind;
+          const ok = form.querySelector('.form-ok');
+          const err = form.querySelector('.form-err');
+          const btn = form.querySelector('button[type=submit]');
+          if (ok) ok.hidden = true;
+          err.hidden = true;
+          const key = kind === 'artist' ? (settings.artistKey || settings.formKey) : settings.formKey;
+          if (!key) { err.textContent = 'This form is not open yet. Please check back soon.'; err.hidden = false; return; }
+          const payload = { access_key: key, from_name: 'Backpocket website' };
+          new FormData(form).forEach((v, k) => { if (k !== 'botcheck') payload[k] = String(v); });
+          payload.consent = 'yes';
+          payload.subject = kind === 'signup' ? 'New Backpocket sign-up' : 'New artist submission for Backpocket' + (payload.name ? ' from ' + payload.name : '');
+          if (form.elements.botcheck && form.elements.botcheck.checked) payload.botcheck = true;
+          btn.disabled = true;
+          try {
+            const res = await fetch('https://api.web3forms.com/submit', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            const j = await res.json().catch(() => ({}));
+            if (!(res.ok && j.success)) throw new Error(j.message || 'failed');
+            form.reset();
+            if (kind === 'signup') window.openThanks(); else if (ok) ok.hidden = false;
+          } catch (x) {
+            err.textContent = 'Something went wrong. Please try again in a moment.';
+            err.hidden = false;
+          } finally { btn.disabled = false; }
+        });
+      });
+    })();
+  </script>
+  <script>
+    // Loads content.json (written by the admin page) and applies it over the built-in copy.
+    (() => {
+      const COLOR_VARS = ['paper', 'ink', 'muted', 'tomato', 'blue', 'yellow'];
+      const FALLBACK = { heading: "Georgia, 'Times New Roman', serif", body: "'Trebuchet MS', Arial, sans-serif" };
+      const FONT_VAR = { heading: '--serif', body: '--sans' };
+      const FORMATS = { woff2: 'woff2', woff: 'woff', ttf: 'truetype', otf: 'opentype' };
+      // wording from the earlier version of the site; ignored so the new defaults show
+      const OLD_TITLE = 'Backpocket — a little room in your pocket';
+      const OLD_DESC = 'Backpocket is an independent artist-made monthly pocket-gallery zine. Explore the first issue and its planned mail subscription.';
+      const clean = (n) => String(n || '').replace(/[^\w \-]/g, '').trim();
+      const themeCache = { colors: {}, fontVars: {}, links: [], css: [] };
+      const reveal = () => document.documentElement.classList.remove('bp-loading');
+      const applyFonts = (fonts) => {
+        document.querySelectorAll('[data-bp-font]').forEach((n) => n.remove());
+        ['--serif', '--sans'].forEach((v) => document.documentElement.style.removeProperty(v));
+        if (!fonts) return;
+        ['heading', 'body'].forEach((role) => {
+          const f = fonts[role];
+          if (!f || !clean(f.name)) return;
+          let family = clean(f.name);
+          if (f.type === 'google') {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://fonts.googleapis.com/css?family=' + encodeURIComponent(family).replace(/%20/g, '+') + ':400,400i,700,700i&display=swap';
+            link.setAttribute('data-bp-font', '1');
+            themeCache.links.push(link.href);
+            document.head.appendChild(link);
+          } else if (f.type === 'upload' && f.src) {
+            const ext = (f.src.split('.').pop() || '').toLowerCase();
+            family = 'BP-' + role;
+            const st = document.createElement('style');
+            st.textContent = "@font-face{font-family:'" + family + "';src:url(\"" + f.src.replace(/"/g, '') + "\") format('" + (FORMATS[ext] || 'woff2') + "');font-weight:100 900;font-display:swap}";
+            st.setAttribute('data-bp-font', '1');
+            themeCache.css.push(st.textContent);
+            document.head.appendChild(st);
+          }
+          const stack = "'" + family + "', " + FALLBACK[role];
+          document.documentElement.style.setProperty(FONT_VAR[role], stack);
+          themeCache.fontVars[FONT_VAR[role]] = stack;
+        });
+      };
+      const setPhoto = (art, photo) => {
+        if (!art || !photo || !photo.src) return;
+        const img = document.createElement('img');
+        img.src = photo.src;
+        img.alt = photo.alt || '';
+        art.classList.add('has-photo');
+        art.removeAttribute('role');
+        art.removeAttribute('aria-label');
+        art.appendChild(img);
+      };
+      fetch('content.json', { cache: 'no-cache' })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((c) => {
+          if (!c) { reveal(); return; }
+          applyFonts(c.fonts);
+          if (window.setSettings) window.setSettings(c.settings);
+          document.querySelectorAll('[data-admin-key]').forEach((el) => {
+            const v = c.text && c.text[el.dataset.adminKey];
+            if (typeof v === 'string' && v.trim()) el.textContent = v;
+          });
+          if (c.meta) {
+            if (c.meta.title && c.meta.title.trim() && c.meta.title !== OLD_TITLE) document.title = c.meta.title;
+            const md = document.querySelector('meta[name="description"]');
+            if (md && c.meta.description && c.meta.description.trim() && c.meta.description !== OLD_DESC) md.content = c.meta.description;
+          }
+          COLOR_VARS.forEach((k) => document.documentElement.style.removeProperty('--' + k));
+          if (c.colors) {
+            COLOR_VARS.forEach((k) => {
+              if (/^#[0-9a-f]{6}$/i.test(c.colors[k] || '')) { document.documentElement.style.setProperty('--' + k, c.colors[k]); themeCache.colors[k] = c.colors[k]; }
+            });
+            const meta = document.querySelector('meta[name="theme-color"]');
+            if (meta && /^#[0-9a-f]{6}$/i.test(c.colors.paper || '')) meta.content = c.colors.paper;
+          }
+          setPhoto(document.getElementById('hero-art'), c.heroImage);
+          const items = Array.isArray(c.gallery) ? c.gallery.filter((g) => g && g.src) : [];
+          if (window.renderGallery) window.renderGallery(items);
+          if (window.renderSocials) window.renderSocials(c.socials);
+          try { localStorage.setItem('bp-theme', JSON.stringify(themeCache)); } catch (e) {}
+          const heroImg = document.querySelector('#hero-art > img');
+          Promise.race([
+            Promise.all([document.fonts ? document.fonts.ready : null, heroImg && heroImg.decode ? heroImg.decode().catch(() => {}) : null]),
+            new Promise((r) => setTimeout(r, 1800))
+          ]).then(reveal);
+        })
+        .catch(() => { reveal(); });
+    })();
+  </script>
+</body>
+</html>
