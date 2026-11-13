@@ -1,7 +1,7 @@
 {
   "text": {
     "gallery-title": "Featured Artists",
-    "brand": "backpocket.",
+    "brand": "self published pocket gallery zine.",
     "nav-copy": "Get your copy",
     "nav-artists": "Be in the zine",
     "hero-eyebrow": "WHATS IN YOUR",
@@ -56,9 +56,14 @@
     "ink": "#ffffff",
     "muted": "#ffe229",
     "tomato": "#ffd747",
-    "blue": "#7a9490",
+    "blue": "#8c9795",
     "yellow": "#e4af11"
   },
+  "sizes": {
+    "heading": 1.3,
+    "body": 1.5
+  },
+  "styles": {},
   "fonts": {
     "heading": {
       "type": "upload",
