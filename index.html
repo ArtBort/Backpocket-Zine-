@@ -400,24 +400,41 @@
           const btn = form.querySelector('button[type=submit]');
           if (ok) ok.hidden = true;
           err.hidden = true;
-          const key = kind === 'artist' ? (settings.artistKey || settings.formKey) : settings.formKey;
-          if (!key) { err.textContent = 'This form is not open yet. Please check back soon.'; err.hidden = false; return; }
-          const payload = { access_key: key, from_name: 'Backpocket website' };
+          const payload = {};
           new FormData(form).forEach((v, k) => { if (k !== 'botcheck') payload[k] = String(v); });
-          payload.consent = 'yes';
-          payload.subject = kind === 'signup' ? 'New Backpocket sign-up' : 'New artist submission for Backpocket' + (payload.name ? ' from ' + payload.name : '');
           if (form.elements.botcheck && form.elements.botcheck.checked) payload.botcheck = true;
           btn.disabled = true;
           try {
-            const res = await fetch('https://api.web3forms.com/submit', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-              body: JSON.stringify(payload)
-            });
-            const j = await res.json().catch(() => ({}));
-            if (!(res.ok && j.success)) throw new Error(j.message || 'failed');
-            form.reset();
-            if (kind === 'signup') window.openThanks(); else if (ok) ok.hidden = false;
+            if (kind === 'signup') {
+              // Google Apps Script: send a simple text/plain request to avoid a CORS preflight.
+              // The no-cors response is opaque, so the page can confirm that the request was sent,
+              // but cannot read a server-side error response.
+              payload.consent = form.elements.consent && form.elements.consent.checked;
+              await fetch('https://script.google.com/macros/s/AKfycbyEgZ59SoyyDhPVEEI3fINSe6NZfQVyftUkGQttAHi_lj_jvfaGnwycCoBi7yAPJTPf/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+                body: JSON.stringify(payload)
+              });
+              form.reset();
+              window.openThanks();
+            } else {
+              const key = settings.artistKey || settings.formKey;
+              if (!key) throw new Error('This form is not open yet.');
+              payload.access_key = key;
+              payload.from_name = 'Backpocket website';
+              payload.consent = 'yes';
+              payload.subject = 'New artist submission for Backpocket' + (payload.name ? ' from ' + payload.name : '');
+              const res = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                body: JSON.stringify(payload)
+              });
+              const j = await res.json().catch(() => ({}));
+              if (!(res.ok && j.success)) throw new Error(j.message || 'failed');
+              form.reset();
+              if (ok) ok.hidden = false;
+            }
           } catch (x) {
             err.textContent = 'Something went wrong. Please try again in a moment.';
             err.hidden = false;
