@@ -130,13 +130,26 @@
     .amounts { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 16px; }
     .textbtn { padding: 8px 0; color: var(--muted); background: none; border: 0; font: calc(.85rem * var(--fs, 1) * var(--bs, 1)) var(--sans); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
     [data-admin-key] { white-space: pre-line; }
+    .split[hidden], .reader[hidden] { display: none; }
+    .code-input { text-transform: uppercase; letter-spacing: .08em; }
+    .reader-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px 20px; flex-wrap: wrap; margin-bottom: 20px; }
+    .reader-head h3 { margin: 0; font: 700 calc(clamp(1.8rem, 4vw, 3rem) * var(--fs, 1) * var(--hs, 1))/1 var(--serif); letter-spacing: -.05em; }
+    .reader-stage { position: relative; display: grid; place-items: center; min-height: 320px; background: color-mix(in srgb, var(--ink) 8%, var(--paper)); border: 1px solid var(--ink); box-shadow: 8px 10px 0 color-mix(in srgb, var(--ink) 15%, transparent); touch-action: pan-y; }
+    .reader-stage img { display: block; max-width: 100%; max-height: 82vh; width: auto; height: auto; transition: opacity .15s; }
+    .reader-stage.loading img { opacity: .35; }
+    .reader-zone { position: absolute; top: 0; bottom: 0; width: 35%; }
+    .reader-zone.prev { left: 0; cursor: w-resize; }
+    .reader-zone.next { right: 0; cursor: e-resize; }
+    .reader-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 22px; }
+    .reader-nav .button:disabled { opacity: .3; cursor: default; }
+    .reader-count { font-weight: 700; font-variant-numeric: tabular-nums; }
     .artboard.has-photo { min-height: 0; display: block; }
     .artboard.has-photo > :not(img) { display: none; }
     .artboard > img { display: block; width: 100%; height: auto; }
     @media (max-width: 700px) {
       .wrap { width: min(100% - 30px, 540px); }
-      header { gap: 8px 18px; }
-      nav { gap: 4px 12px; font-size: calc(.82rem * var(--fs, 1) * var(--bs, 1)); }
+      header { gap: 8px 18px; flex-wrap: wrap; }
+      nav { flex-wrap: wrap; gap: 4px 12px; font-size: calc(.82rem * var(--fs, 1) * var(--bs, 1)); }
       .hero { min-height: 0; grid-template-columns: 1fr; gap: 5px; padding: 48px 0 36px; }
       h1 { font-size: calc(clamp(3.6rem, 17vw, 6rem) * var(--fs, 1) * var(--hs, 1)); }
       .artboard { min-height: 365px; }
@@ -156,7 +169,7 @@
 <header>
 <a aria-label="Backpocket home" class="brand" data-admin-key="brand" href="#home">backpocket.</a>
 <nav aria-label="Main navigation">
-<a data-admin-key="nav-what" href="#what">What is it</a><a data-admin-key="nav-copy" href="#signup">Get your copy</a><a data-admin-key="nav-artists" href="#artists">Be in the zine</a>
+<a data-admin-key="nav-what" href="#what">What is it</a><a data-admin-key="nav-copy" href="#signup">Get your copy</a><a data-admin-key="nav-read" href="#read">Read the zine</a><a data-admin-key="nav-artists" href="#artists">Be in the zine</a>
 </nav>
 </header>
 <main id="home" tabindex="-1">
@@ -206,6 +219,33 @@
 <button class="button" data-admin-key="signup-button" type="submit">Send me the zine</button>
 <p class="form-err" hidden="" role="alert"></p>
 </form>
+</div>
+</section>
+
+<section aria-labelledby="read-title" id="read">
+<div class="split" id="read-intro">
+<div>
+<div class="eyebrow" data-admin-key="read-eyebrow">For subscribers</div>
+<h2 id="read-title" data-admin-key="read-title">Read the zine.</h2>
+<p class="lede" data-admin-key="read-text">Every month subscribers get a code by email. Type it here to open that issue. Old codes keep working.</p>
+</div>
+<form class="form" id="code-form">
+<label><span data-admin-key="read-code-label">Your zine code</span><input autocapitalize="characters" autocomplete="off" class="code-input" maxlength="64" name="code" required="" spellcheck="false" type="text"/></label>
+<button class="button" data-admin-key="read-button" type="submit">Open the zine</button>
+<p class="form-err" hidden="" role="alert"></p>
+</form>
+</div>
+<div class="reader" hidden="" id="reader">
+<div class="reader-head"><h3 id="reader-title" tabindex="-1"></h3><button class="textbtn" data-admin-key="read-other" id="reader-other" type="button">Use another code</button></div>
+<div class="reader-stage" id="reader-stage">
+<img alt="" id="reader-img"/>
+<div aria-hidden="true" class="reader-zone prev" data-step="-1"></div><div aria-hidden="true" class="reader-zone next" data-step="1"></div>
+</div>
+<div class="reader-nav">
+<button class="button alt" data-admin-key="read-prev" id="reader-prev" type="button">← Back</button>
+<span aria-live="polite" class="reader-count" id="reader-count"></span>
+<button class="button" data-admin-key="read-next" id="reader-next" type="button">Next →</button>
+</div>
 </div>
 </section>
 
@@ -267,6 +307,8 @@
 
 <script>
     // Forms, thank-you popup and PayPal buttons.
+    // The Google Script that handles sign-ups and zine codes (same URL after "Manage deployments → New version").
+    window.BP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyEgZ59SoyyDhPVEEI3fINSe6NZfQVyftUkGQttAHi_lj_jvfaGnwycCoBi7yAPJTPf/exec';
     (() => {
       const settings = { formKey: '', artistKey: '', paypal: '' };
       const dlg = document.getElementById('thanks');
@@ -406,16 +448,20 @@
           btn.disabled = true;
           try {
             if (kind === 'signup') {
-              // Google Apps Script: send a simple text/plain request to avoid a CORS preflight.
-              // The no-cors response is opaque, so the page can confirm that the request was sent,
-              // but cannot read a server-side error response.
+              // Google Apps Script: a simple text/plain request avoids a CORS preflight,
+              // and the script's JSON answer can still be read.
               payload.consent = form.elements.consent && form.elements.consent.checked;
-              await fetch('https://script.google.com/macros/s/AKfycbyEgZ59SoyyDhPVEEI3fINSe6NZfQVyftUkGQttAHi_lj_jvfaGnwycCoBi7yAPJTPf/exec', {
+              const res = await fetch(window.BP_SCRIPT_URL, {
                 method: 'POST',
-                mode: 'no-cors',
                 headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
                 body: JSON.stringify(payload)
               });
+              const j = await res.json();
+              if (!j.success) {
+                err.textContent = j.message || 'Something went wrong. Please try again in a moment.';
+                err.hidden = false;
+                return;
+              }
               form.reset();
               window.openThanks();
             } else {
@@ -441,6 +487,112 @@
           } finally { btn.disabled = false; }
         });
       });
+    })();
+  </script>
+  <script>
+    // Zine reader: checks a subscriber code with the Google Script, then shows the pages.
+    (() => {
+      const form = document.getElementById('code-form');
+      const intro = document.getElementById('read-intro');
+      const reader = document.getElementById('reader');
+      const stage = document.getElementById('reader-stage');
+      const img = document.getElementById('reader-img');
+      const title = document.getElementById('reader-title');
+      const count = document.getElementById('reader-count');
+      const prev = document.getElementById('reader-prev');
+      const next = document.getElementById('reader-next');
+      const err = form.querySelector('.form-err');
+      const btn = form.querySelector('button[type=submit]');
+      const input = form.elements.code;
+      let pages = [];
+      let at = 0;
+
+      // Drive image links: the thumbnail address first, the other one if that fails
+      const pageUrl = (id, backup) => backup
+        ? 'https://lh3.googleusercontent.com/d/' + id + '=w2000'
+        : 'https://drive.google.com/thumbnail?id=' + id + '&sz=w2000';
+
+      img.addEventListener('load', () => stage.classList.remove('loading'));
+      img.addEventListener('error', () => {
+        if (img.dataset.backup) { stage.classList.remove('loading'); return; }
+        img.dataset.backup = '1';
+        img.src = pageUrl(pages[at], true);
+      });
+
+      const show = (i) => {
+        if (!pages.length) return;
+        at = Math.max(0, Math.min(pages.length - 1, i));
+        delete img.dataset.backup;
+        stage.classList.add('loading');
+        img.src = pageUrl(pages[at]);
+        img.alt = 'Page ' + (at + 1) + ' of ' + pages.length;
+        count.textContent = (at + 1) + ' / ' + pages.length;
+        prev.disabled = at === 0;
+        next.disabled = at === pages.length - 1;
+        [at + 1, at + 2].forEach((j) => { if (pages[j]) new Image().src = pageUrl(pages[j]); });
+      };
+
+      const fail = (msg) => { err.textContent = msg; err.hidden = false; };
+
+      const open = async (code) => {
+        code = String(code || '').trim();
+        if (!code) return;
+        err.hidden = true;
+        btn.disabled = true;
+        try {
+          const res = await fetch(window.BP_SCRIPT_URL + '?action=issue&code=' + encodeURIComponent(code));
+          const j = await res.json();
+          if (!j.success) { fail(j.message || 'That code doesn’t match an issue.'); return; }
+          const list = (j.issue && Array.isArray(j.issue.pages) ? j.issue.pages : []).filter((id) => /^[\w-]{10,}$/.test(String(id)));
+          if (!list.length) { fail('This issue isn’t ready yet. Please try again later.'); return; }
+          pages = list;
+          title.textContent = String(j.issue.title || '');
+          intro.hidden = true;
+          reader.hidden = false;
+          show(0);
+          title.focus({ preventScroll: true });
+          reader.scrollIntoView({ block: 'start' });
+          try { localStorage.setItem('bp-code', code); } catch (e) {}
+        } catch (x) {
+          fail('Could not reach the zine right now. Please try again in a moment.');
+        } finally { btn.disabled = false; }
+      };
+
+      form.addEventListener('submit', (e) => { e.preventDefault(); open(input.value); });
+      prev.addEventListener('click', () => show(at - 1));
+      next.addEventListener('click', () => show(at + 1));
+      stage.querySelectorAll('.reader-zone').forEach((z) => z.addEventListener('click', () => show(at + Number(z.dataset.step))));
+      document.getElementById('reader-other').addEventListener('click', () => {
+        reader.hidden = true;
+        intro.hidden = false;
+        input.value = '';
+        input.focus();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (reader.hidden || document.querySelector('dialog[open]')) return;
+        if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
+        if (e.key === 'ArrowLeft') show(at - 1);
+        if (e.key === 'ArrowRight') show(at + 1);
+      });
+      let touchX = null;
+      stage.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+      stage.addEventListener('touchend', (e) => {
+        if (touchX === null) return;
+        const dx = e.changedTouches[0].clientX - touchX;
+        touchX = null;
+        if (Math.abs(dx) > 40) show(at + (dx < 0 ? 1 : -1));
+      });
+
+      // A link from the email (…?code=ABC#read) opens the issue straight away
+      const params = new URLSearchParams(location.search);
+      const fromLink = params.get('code');
+      if (fromLink) {
+        input.value = fromLink;
+        history.replaceState(null, '', location.pathname + '#read');
+        open(fromLink);
+      } else {
+        try { input.value = localStorage.getItem('bp-code') || ''; } catch (e) {}
+      }
     })();
   </script>
   <script>
